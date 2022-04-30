@@ -1,0 +1,99 @@
+[
+    {
+      "_id":"12345",
+      "name": "notepad",
+      "catagory":"Roots",
+      "tags": [
+        "office",
+        "writing",
+        "school"
+      ],
+      "price":"35.29"
+      ,
+      "quantity":"2"
+      ,
+      "addDate":"datestring",
+      "itemHolder":"_id"
+    },
+    {
+      "_id":"1234345",
+      "name": "notepad",
+      "catagory":"Roots",
+      "tags": [
+        "office",
+        "writing",
+        "school"
+      ],
+      "price": "35.29"
+      ,
+      "quantity":"2"
+      ,
+      "addDate":"datestring",
+      "itemHolder":"_id"
+    },
+    {
+      "_id":"1234325",
+      "name": "notepad",
+      "catagory":"Roots",
+      "tags": [
+        "office",
+        "writing",
+        "school"
+      ],
+      "price":"350.29"
+      ,
+      "quantity":"2"
+      ,
+      "addDate":"datestring",
+      "itemHolder":"_id"
+    },
+    {
+      "_id":"12346",
+      "name": "pens",
+      "catagory":"Roots",
+      "tags": [
+        "writing",
+        "office",
+        "school",
+        "stationary"
+      ],
+      "price":"56.12"
+      ,
+      "quantity":"5"
+      ,
+      "addDate":"datestring",
+      "itemHolder":"_id"
+    },
+    {
+      "_id":"12347",
+      "name": "envelopes",
+      "catagory":"Eggs",
+      "tags": [
+        "stationary",
+        "office",
+        "general"
+      ],
+      "price":"19.95"
+      ,
+      "quantity":"8"
+      ,
+      "addDate":"datestring",
+      "itemHolder":"_id"
+    },
+    {
+      "_id":"12348",
+      "name": "binder",
+      "catagory":"Stationery",
+      "tags": [
+        "school",
+        "general",
+        "organization"
+      ],
+      "price":"14.16"
+      ,
+      "quantity":"3"
+      ,
+      "addDate":"datestring",
+      "itemHolder":"_id"
+    }
+  ]
