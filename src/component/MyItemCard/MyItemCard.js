@@ -17,29 +17,34 @@ const buttonva = {
   },
 };
 
-const MyCourseCard = ({ item, isAdd,setisAdd, editItem,  removeItem}) => {
+const MyCourseCard = ({ item,id, isAdd,setisAdd, editItem,  removeItem}) => {
   const [hovered, setHovered] = useState(false);
-  const [select, setSelect] = useState(true)
+//   const [select, setSelect] = useState(false)
   const toggleHover = () => setHovered(!hovered);
 
-  const {
-    ref,
-    isComponentVisible,
-    setIsComponentVisible
-  } = useComponentVisible(false);
+//   const {
+//     ref,
+//     isComponentVisible,
+//     setIsComponentVisible
+//   } = useComponentVisible(false);
 
   const hadleEdit=(id)=>{
     editItem(id)
-    setIsComponentVisible(true)
-    
+    // setIsComponentVisible(true)
+
+    // setSelect(true)
+    setisAdd(false)
 
   }
-  useEffect(()=>{
-    setisAdd(!isComponentVisible)
-  },[isComponentVisible])
+//   useEffect(()=>{
+//       console.log(select, isComponentVisible)
+//     // setIsComponentVisible(true)
+//     // setisAdd(!isComponentVisible)
+//     setSelect(false)
+//   },[isAdd])
   return (
-    <div className="CartContent" ref={ref}>
-      <div className={ isComponentVisible? "CardMain position-relative bg-warning " : "CardMain position-relative "}>
+    <div className="CartContent">
+      <div className={  (id==item._id) ? "CardMain position-relative bg-warning " : "CardMain position-relative "}>
         <motion.div
           variants={buttonva}
           whileHover="hover"
@@ -49,7 +54,7 @@ const MyCourseCard = ({ item, isAdd,setisAdd, editItem,  removeItem}) => {
           <i
             class="m-2 fas fa-trash"
             style={{ color: "#FF4500", cursor: "pointer" }}
-            onClick={()=>{removeItem(item._id); setSelect(false)}}
+            onClick={()=>{removeItem(item._id)}}
           >X</i>
         </motion.div>
         <motion.div className="fa-2x position-absolute bottom-0 end-0">
@@ -58,7 +63,7 @@ const MyCourseCard = ({ item, isAdd,setisAdd, editItem,  removeItem}) => {
             className={hovered ? " m-2 fas fa-cog fa-spin" : " m-2 fas fa-cog"}
             onMouseEnter={toggleHover}
             onMouseLeave={toggleHover}
-            style={select? { color: "orange", cursor: "pointer" }:{ color: "#FF4500", cursor: "pointer" }}
+            style={!(id==item._id)? { color: "orange", cursor: "pointer" }:{ color: "#FF4500", cursor: "pointer" }}
             onClick={()=>hadleEdit(item._id)}
           >Z</motion.i>
         </motion.div>

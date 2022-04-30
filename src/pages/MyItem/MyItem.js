@@ -11,7 +11,7 @@ import useComponentVisible from "../../component/useComponentVisible/useComponen
 // import "./style.css"
 
 const MyItem = () => {
-  const [id, setid] = useState("");
+  const [id, setid] = useState("we");
   const [formData, setformData] = useState({});
   const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(true);
   const [alldata, setalldata] = LoadHomeData();
@@ -175,6 +175,7 @@ const MyItem = () => {
               <div key={index} className="col-6 ">
                 <MyItemCard
                   item={item}
+                  id={id}
                   isAdd={isAdd}
                   setisAdd={setisAdd}
                   editItem={editItem}
