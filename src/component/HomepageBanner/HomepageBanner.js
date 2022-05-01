@@ -1,5 +1,6 @@
 import React from "react";
 import './HomeBanner.css';
+import image from "../../assets/Images/bg1.jpg"
 
 const HomepageBanner = () => {
   return (
@@ -9,7 +10,7 @@ const HomepageBanner = () => {
           learn new things
         </p>
         <div className="BannerSection">
-          <img className="BannerImage" src="banner.jpg" alt="banner1" />
+          <img className="BannerImage" src={image} alt="banner1" />
         </div>
     </div>
   );

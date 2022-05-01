@@ -30,30 +30,30 @@ const Categories = ({setalldata, alldata}) => {
   const [data, setdata] = LoadHomeData();
   const [catValue, setcatValue] = useState([]);
   function handleinput(event) {
-    // console.log(event.target.value, event.target.checked);
+    console.log(event.target.value, event.target.checked);
     if (event.target.checked) {
       
         setcatValue([event.target.value, ...catValue]);
-        // console.log(catValue);
+        console.log(catValue);
       
     } else {
       setcatValue(catValue.filter((item) => item !== event.target.value));
-      // console.log(catValue);
+      console.log(catValue);
     }
-    // console.log(catValue);
+    console.log(catValue);
   }
 
   const handleChange1 = (event, newValue) => {
     setValue(newValue);
-    // console.log(value[0]);
+    console.log(value[0]);
   };
 
   useEffect(()=>{
     // console.log(value, catValue)
     // console.log(catValue.includes('Eggs'))
-    setalldata(data.filter(e=>(parseInt(e.price.$numberDecimal) >= value[0]) && (parseInt(e.price.$numberDecimal) <= value[1]) ))
+    setalldata(data.filter(e=>(parseInt(e.price) >= value[0]) && (parseInt(e.price) <= value[1]) ))
     if(catValue.length !== 0){
-    setalldata(data.filter(e=> (parseInt(e.price.$numberDecimal) >= value[0]) && (parseInt(e.price.$numberDecimal) <= value[1]) && catValue.includes(e.catagory)))
+    setalldata(data.filter(e=> (parseInt(e.price) >= value[0]) && (parseInt(e.price) <= value[1]) && catValue.includes(e.catagory)))
     }
   },[value,catValue])
 
@@ -74,7 +74,7 @@ const Categories = ({setalldata, alldata}) => {
   }
 
   return (
-    <div className="CategoryDevider px-4">
+    <div className="CategoryDevider ">
       <div className="Categories-main">
         <h3 className="Categories-heading"> Categories </h3>
 

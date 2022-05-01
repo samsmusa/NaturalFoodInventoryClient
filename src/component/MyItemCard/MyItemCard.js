@@ -5,87 +5,77 @@ import image from "../../assets/Images/ml.png";
 import "./MyItemCard.css";
 import { motion } from "framer-motion";
 
-import useComponentVisible from "../../component/useComponentVisible/useComponentVisible"
+import useComponentVisible from "../../component/useComponentVisible/useComponentVisible";
 
 const buttonva = {
   hover: {
     scale: 1.2,
-    rotate:15,
+    rotate: 15,
     transition: {
       yoyo: Infinity,
     },
   },
 };
 
-const MyCourseCard = ({ item,id, isAdd,setisAdd, editItem,  removeItem}) => {
+const MyCourseCard = ({ item, id, isAdd, setisAdd, editItem, removeItem }) => {
   const [hovered, setHovered] = useState(false);
-//   const [select, setSelect] = useState(false)
   const toggleHover = () => setHovered(!hovered);
 
-//   const {
-//     ref,
-//     isComponentVisible,
-//     setIsComponentVisible
-//   } = useComponentVisible(false);
-
-  const hadleEdit=(id)=>{
-    editItem(id)
-    // setIsComponentVisible(true)
-
-    // setSelect(true)
-    setisAdd(false)
-
-  }
-//   useEffect(()=>{
-//       console.log(select, isComponentVisible)
-//     // setIsComponentVisible(true)
-//     // setisAdd(!isComponentVisible)
-//     setSelect(false)
-//   },[isAdd])
+  const hadleEdit = (id, category) => {
+    editItem(id, category);
+    setisAdd(true);
+  };
   return (
     <div className="CartContent">
-      <div className={  (id==item._id) ? "CardMain position-relative bg-warning " : "CardMain position-relative "}>
-        <motion.div
-          variants={buttonva}
-          whileHover="hover"
-          className="fa-2x position-absolute top-0 end-0"
-          
-        >
-          <i
-            class="m-2 fas fa-trash"
-            style={{ color: "#FF4500", cursor: "pointer" }}
-            onClick={()=>{removeItem(item._id)}}
-          >X</i>
-        </motion.div>
-        <motion.div className="fa-2x position-absolute bottom-0 end-0">
-          <motion.i
+      <div
+        className={
+          id == item._id
+            ? "d-flex justify-content-between align-items-center bg-warning "
+            : "d-flex justify-content-between align-items-center bg-light"
+        }
+      >
+        
+        <div className="d-flex justify-content-between "> 
+        <Link className="productLink" to="/">
+          <div className="CardImageParent">
+            <img src={image} className="img-fluid" style={{width:"100px", height:"80px"}} alt="course" />
+          </div>
+        </Link>
+
+        <div className="product">
+          <p className="CourseTitle m-0">{item.name}</p>
+            <p className="m-0 p-0" style={{fontSize:"10px"}}>{item.catagory}</p>
+            <p className="m-0 p-0" style={{fontSize:"10px"}}>{item.catagory}</p>
+        </div>
+        </div> 
+        <div>
+        <p className="m-0 p-0">{item.price}</p>
+        </div>
+        <div>
+          <p className="m-0 p-0">sun, 1 july, 2020</p>
+        </div>
+        <div>
+        <motion.i
             whileHover={{ scale: 1.1 }}
             className={hovered ? " m-2 fas fa-cog fa-spin" : " m-2 fas fa-cog"}
             onMouseEnter={toggleHover}
             onMouseLeave={toggleHover}
-            style={!(id==item._id)? { color: "orange", cursor: "pointer" }:{ color: "#FF4500", cursor: "pointer" }}
-            onClick={()=>hadleEdit(item._id)}
-          >Z</motion.i>
-        </motion.div>
-        <Link className="productLink" to="/">
-          <div className="CardImageParent">
-            <img src={image} alt="course" />
-          </div>
-        </Link>
-
-        <div className="CardSideContent">
-          <p className="CourseTitle">{item.name}</p>
-
-          <div className="CardParent1">
-            <p className="CourseTeacher">{item.catagory}</p>
-          </div>
-          <div className="CardParent1">
-            <p className="CourseTeacher">{item.catagory}</p>
-          </div>
-
-          <div className="CardParent3">
-            <p className="CoursePrice">₹ {item.price}</p>
-          </div>
+            style={
+              !(id == item._id)
+                ? { color: "orange", cursor: "pointer" }
+                : { color: "#FF4500", cursor: "pointer" }
+            }
+            onClick={() => hadleEdit(item._id, item.catagory)}
+          ></motion.i>
+          <motion.i
+            variants={buttonva}
+            whileHover="hover"
+            class="m-2 fas fa-trash"
+            style={{ color: "#FF4500", cursor: "pointer" }}
+            onClick={() => {
+              removeItem(item._id);
+            }}
+          ></motion.i>
         </div>
       </div>
     </div>

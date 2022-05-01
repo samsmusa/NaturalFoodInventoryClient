@@ -33,81 +33,79 @@ a:hover {
 }
 
 .content {
-  /* padding: 7rem 0; */
+  padding: 7rem 0;
 }
 
 h2 {
   font-size: 20px;
 }
 
-.halfs,
-.halfs .container > .row {
+.half,
+.half .container > .row {
   height: 100vh;
   min-height: 900px;
-  /* padding: 10px !important; */
 }
 
 @media (max-width: 991.98px) {
-  .halfs .bg {
+  .half .bg {
     height: 200px;
   }
 }
 
-.halfs .contents {
-  background: #e5e6eb;
+.half .contents {
+  background: #f6f7fc;
 }
 
-.halfs .contents {
-  width: 100%;
+.half .contents {
+  width: 80%;
 }
 
-.halfs .bg {
+.half .bg {
   width: 20%;
 }
 
 @media (max-width: 991.98px) {
-  .halfs .contents,
-  .halfs .bg {
+  .half .contents,
+  .half .bg {
     width: 100%;
   }
 }
 
-.halfs .contents .form-control,
-.halfs .bg .form-control {
+.half .contents .form-control,
+.half .bg .form-control {
   border: none;
   -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
   border-radius: 4px;
-  /* height: 40px; */
+  height: 54px;
   background: #fff;
 }
-.halfs .contents .form-control:active,
-.halfs .contents .form-control:focus,
-.halfs .bg .form-control:active,
-.halfs .bg .form-control:focus {
-  outline-style: solid;
-  outline-color: #FFA500;
-  -webkit-box-shadow: 0 1px 3x 0 #FFA500;
-  box-shadow: 0 1px 3px 0 #FFA500;
+.half .contents .form-control:active,
+.half .contents .form-control:focus,
+.half .bg .form-control:active,
+.half .bg .form-control:focus {
+  outline: none;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
 }
 
-.halfs .bg {
+.half .bg {
   background-size: cover;
   background-position: center;
 }
 
-.halfs a {
+.half a {
   color: #888;
   text-decoration: underline;
 }
 
-.halfs .btn {
+.half .btn {
   height: 54px;
-  /* padding-left: 30px;
-  padding-right: 30px; */
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
-.halfs .forgot-pass {
+.half .forgot-pass {
   position: relative;
   top: 2px;
   font-size: 14px;
@@ -199,4 +197,12 @@ h2 {
 .control--checkbox input:disabled:checked ~ .control__indicator {
   background-color: #7e0cf5;
   opacity: 0.2;
+}
+
+.ck-editor:last-child {
+  display: none !important;
+}
+
+.ck-content{
+  height: 250px;
 }

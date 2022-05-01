@@ -8,9 +8,10 @@ const HomeItemCards = ({item}) => {
   return (
     
     <motion.div 
-      initial={{opacity:0.5, scale:0.5 }}
-      animate={{y:0, opacity:1, scale:1 }}
-      exit={{ scale:0.5 , opacity: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0.5 }}
+      transition={{ease:"easeIn" ,duration: 0.2 }}
       className="Course-Cards">
       <div className="my-card">
         <NavLink to="/">
