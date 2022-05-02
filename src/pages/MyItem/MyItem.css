@@ -32,6 +32,13 @@
 
 
 } */
+.my-container {
+  padding-top: 57px !important;
+}
+
+@media screen and (max-width: 768px) {
+    .my-container { padding-top: 0px !important; }
+}
 
 .list-group{
   max-height: 100vh;
@@ -46,6 +53,17 @@
 }
 .list-group::-webkit-scrollbar { 
   display: none;  /* Safari and Chrome */
+}
+
+.table-heading{
+  background: rgb(53,107,236);
+  background: linear-gradient(180deg, rgba(53,107,236,1) 0%, rgba(29,115,158,1) 0%, rgba(67,121,215,1) 100%);
+}
+.table-heading-close{
+  background: #696969;
+}
+.bgc-item {
+  background-color: #FCF8A0;
 }
 
 .CardMain {
@@ -163,6 +181,38 @@
 
 .CourseBuy:hover {
   opacity: 0.6;
+}
+
+.side-tab:hover {
+  transform: scale(0.9);
+}
+
+.select-side-tab {
+  transform: scale(0.9);
+  background-color: #a9a9a9 !important;
+  color:white !important;
+  border-radius: 10px;
+}
+.select-side-tab-blue {
+  transform: scale(0.9);
+  /* background-color: #a9a9a9 !important; */
+  color:white !important;
+  border-radius: 10px;
+}
+
+.select-side-tab span {
+  color:rgb(255, 255, 255) !important;
+  /* text-shadow: 1px 1px 5px  rgb(226, 92, 92) !important; */
+  text-shadow: 1px 1px 5px #566775;
+
+}
+
+.right-side-card {
+  color: #ffffff;
+  max-height: 30px;
+  font-size: 13px;
+  text-align: center;
+  text-shadow: 1px 1px 5px #cec9c9;
 }
 
 @media (max-width: 500px) {

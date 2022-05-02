@@ -30,8 +30,8 @@ const MyCourseCard = ({ item, id, isAdd, setisAdd, editItem, removeItem }) => {
       <div
         className={
           id == item._id
-            ? "d-flex justify-content-between align-items-center bg-warning "
-            : "d-flex justify-content-between align-items-center bg-light"
+            ? "d-flex p-2 justify-content-between align-items-center bgc-item "
+            : "d-flex p-2 justify-content-between align-items-center bg-light"
         }
       >
         
@@ -60,6 +60,7 @@ const MyCourseCard = ({ item, id, isAdd, setisAdd, editItem, removeItem }) => {
             className={hovered ? " m-2 fas fa-cog fa-spin" : " m-2 fas fa-cog"}
             onMouseEnter={toggleHover}
             onMouseLeave={toggleHover}
+            data-bs-toggle="modal" data-bs-target="#exampleModal"
             style={
               !(id == item._id)
                 ? { color: "orange", cursor: "pointer" }

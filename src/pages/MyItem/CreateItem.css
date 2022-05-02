@@ -72,8 +72,7 @@ h2 {
   }
 }
 
-.halfs .contents .form-control,
-.halfs .bg .form-control {
+..form-control {
   border: none;
   -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
@@ -81,10 +80,10 @@ h2 {
   /* height: 40px; */
   background: #fff;
 }
-.halfs .contents .form-control:active,
-.halfs .contents .form-control:focus,
-.halfs .bg .form-control:active,
-.halfs .bg .form-control:focus {
+.form-control:active,
+.form-control:focus,
+.form-control:active,
+.form-control:focus {
   outline-style: solid;
   outline-color: #FFA500;
   -webkit-box-shadow: 0 1px 3x 0 #FFA500;

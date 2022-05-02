@@ -9,7 +9,7 @@ import { signOut } from 'firebase/auth';
 const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);
   return (
-    <nav className=" navbar navbar-expand-lg  ">
+    <nav className=" navbar navbar-expand-lg fixed-top ">
       <div className="container">
         <NavLink to="/" className="navbar-brand nav-it">
           <Logo />

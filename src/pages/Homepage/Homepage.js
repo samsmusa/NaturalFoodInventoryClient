@@ -44,7 +44,7 @@ const Homepage = () => {
                     <CircularProgress />
                   </Box>
                 ) : (
-                  alldata.map((e) => <HomeItemCards key={e._id} item={e} />)
+                  alldata.map((e) => <HomeItemCards key={e._id +'era'} item={e} />)
                 )}
               </AnimatePresence>
             </div>

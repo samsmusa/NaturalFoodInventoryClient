@@ -5,29 +5,17 @@ import LoadHomeData from "../../component/loadData/LoadHomeData";
 import MyItemCard from "../../component/MyItemCard/MyItemCard";
 import "./MyItem.css";
 import "./CreateItem.css";
-import { Link } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
+import { Line, CartesianGrid, XAxis, YAxis, ComposedChart, Tooltip, Legend, Area, Bar } from 'recharts';
 
 import useComponentVisible from "../../component/useComponentVisible/useComponentVisible";
 // import "./style.css"
-const catagorie = [
-  "Cereals",
-  "Roots",
-  "Pulses and Nuts",
-  "Milk",
-  "Eggs",
-  "Fish and Shellfish",
-  "Meat",
-  "Vegetables",
-  "Fruits",
-  "Fats and Oils",
-  "Sweets and Sugars",
-  "Spices and Condiments",
-  "Beverage",
-];
+
+
 // timestamp= {nanoseconds: 0,
 //   seconds: 1562524200}
 
@@ -36,301 +24,256 @@ const catagorie = [
 const MyItem = () => {
   // hadnle user
   const [user, loading, error] = useAuthState(auth);
-  const { lastSignInTime, creationTime } = user;
-  console.log(user?.metadata?.lastSignInTime);
-  console.log(user?.metadata?.creationTime);
 
-  const [selectedOption, setSelectedOption] = useState(catagorie[0]);
-  const [id, setid] = useState("we");
-  const [formData, setformData] = useState({});
-  const { ref, isComponentVisible, setIsComponentVisible } =
-    useComponentVisible(true);
-  const [alldata, setalldata] = LoadHomeData();
-  const [isAdd, setisAdd] = useState(false);
+  let location = useLocation();
 
-  const editItem = (id, category) => {
-    // setisAdd(true);
-    console.log(category);
-    setSelectedOption(category);
-    setid(id);
-  };
+  let locationName = location.pathname;
+  console.log(locationName, locationName==="/myitem/inventory")
+  // let locationName = location.pathname.split('/').slice(-1)[0];
 
-  const removeItem = (id) => {
-    setalldata([...alldata.filter((itm) => itm._id != id)]);
-  };
-  useEffect(() => {
-    setformData(alldata.find((itm) => itm._id == String(id)));
-  }, [id]);
-
-  const handleChangeTitle = (event) => {
-    const { name, ...res } = formData;
-    setformData({ name: event.target.value });
-  };
-  // const handleChangeImage = (event)=>{
-  //   const {name, ...res} = formData
-  //   setformData({name:event.target.value})
-  // }
-  const handleChangePrice = (event) => {
-    const { price, ...res } = formData;
-    setformData({ price: event.target.value });
-  };
-  const handleChangeQuantity = (event) => {
-    const { quantity, ...res } = formData;
-    setformData({ quantity: event.target.value });
-  };
-  // const handleChangeTitle = (event)=>{
-  //   const {name, ...res} = formData
-  //   setformData({name:event.target.value})
-  // }
-  const addItem = () => {
-    setisAdd(false);
-    setSelectedOption("Cereals");
-    setformData({
-      name: "",
-      image: "",
-      price: "",
-      quantity: "",
-      category: "Cereals",
-    });
-    setid("");
-  };
-
-  const submitHandle = (event) => {
-    console.log(event.target.title.value);
-    event.preventDefault();
-    if (!isAdd) {
-      console.log(102);
-      setalldata([
-        {
-          name: event.target.title.value,
-          catagory: event.target.title.value,
-          price: event.target.price.value,
-          quantity: selectedOption,
-        },
-        ...alldata,
-      ]);
-    } else {
-      console.log(502);
-      const editdata = alldata.find((itm) => itm._id == String(id));
-      editdata.name = event.target.title.value;
-      // editdata.name = event.target.image.value
-      editdata.price = event.target.price.value;
-      editdata.quantity = event.target.quantity.value;
-      editdata.catagory = selectedOption;
-
-      setalldata([editdata, ...alldata.filter((itm) => itm._id != id)]);
-    }
-  };
+  
   return (
-    <div className="container p-0  bg-light">
+    <div className="container my-container p-0  bg-light">
       <div className=" Course-Content row p-0 m-0">
-        <div className="halfs col-3 p-0 m-0">
-          <div className="p-2 pt-5 contents  h-100">
-            <Categories alldata={alldata} setalldata={setalldata} />
-            <input
-              type="submit"
-              onClick={addItem}
-              value="Add New"
-              className="text-center mx-2 btn btn-sm btn-primary text-dark bg-warning"
-            />
-            <input
-              type="submit"
-              value="Select item to edit"
-              className="text-center btn btn-sm btn-primary mx-2 text-dark bg-danger"
-              disabled={!isAdd}
-              style={{ cursor: "progress" }}
-            />
-
-            <form onSubmit={submitHandle} className="px-3">
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="form-group first">
-                    <label>Product Title</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="ef mango"
-                      value={formData?.name}
-                      name="title"
-                      onChange={handleChangeTitle}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="form-group first">
-                    <label>Product Image</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="eg htt"
-                      value={formData?.image}
-                      name="image"
-                      onChange={handleChangeTitle}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="form-group first">
-                    <label>Product Category</label>
-                    <select
-                      value={selectedOption}
-                      className="form-control"
-                      onChange={(e) => setSelectedOption(e.target.value)}
-                    >
-                      {catagorie.map((itm, index) => (
-                        <option key={index} value={itm}>
-                          {itm}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="form-group first">
-                    <label>Price</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="eg $100"
-                      value={formData?.price}
-                      name="price"
-                      onChange={handleChangePrice}
-                    />
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="form-group first">
-                    <label>Total Quantity</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="eg 10"
-                      value={formData?.quantity}
-                      name="quantity"
-                      onChange={handleChangeQuantity}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <input
-                type="submit"
-                value={!isAdd ? "Add" : "Edit"}
-                className="active-category text-center mt-3"
-                style={{ backgroundColor: "#FF4500", border: "none" }}
-              />
-            </form>
+        <AnimatePresence>
+        <motion.div
+          initial={{ opacity: 0.5 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0.5 }}
+          transition={{ ease: "easeInOut", duration: 0.2 }}
+          className="col-2 m-0 p-0"
+          style={{ backgroundColor: "#dcdcdc" }}
+        >
+          <div className="mt-1 px-2">
+            <p className="m-0 p-0" style={{ color: "#696969" }}>
+              Loged in: {user.email}
+            </p>
+            <p
+              className="m-0 p-0"
+              style={{ fontSize: "12px", color: "#696969" }}
+            >
+              Last view at: {user?.metadata?.lastSignInTime}
+            </p>
+            <p
+              className="m-0 p-0"
+              style={{ fontSize: "12px", color: "#696969" }}
+            >
+              Account Created at: {user?.metadata?.creationTime}
+            </p>
           </div>
-        </div>
-
-        <div className="mt-5 p-0  col-6">
-          {/* <div className="col-12 ">
-            <div className="d-flex justify-content-between">
-              <div>
-                <p className="CartSubTitle">last time visit: {user?.metadata?.lastSignInTime}</p>
-                <p className="CartSubTitle">Account Created at: {user?.metadata?.creationTime}</p>
-              </div>
-              <div>
-                <p className="CartTitle">My Store</p>
-                <p className="CartSubTitle">You have 4 items!</p>
-              </div>
+          <div className="list-group">
+          <div className="mt-2 p-0 py-2" style={{ backgroundColor: "#f4f0ec" }}>
+            <div className="d-flex m-0 mx-2 p-0 align-items-center justify-content-start">
+              <i className="fa-2x fas fa-cog" onMouseEnter={(event)=> event.target.classList.add('fa-spin')} onMouseLeave={(event)=>event.target.classList.remove('fa-spin')}></i>
+              <span className="mx-3 fs-3 fw-bold">Accounts</span>
             </div>
-          </div> */}
-          <AnimatePresence>
-            <div class="panel-heading">
-              <li
-                className="list-group-item active text-center"
-                aria-current="true"
-              >
-                An active item
-              </li>
-              <li
-                class="list-group-item text-center text-dark"
-                aria-current="true"
-                style={{
-                  backgroundColor: "#c4c3d0",
-                  fontSize: "15px",
-                  color: "black",
-                }}
-              >
-                <div
-                  className="d-flex justify-content-between m-0 p-0"
-                  style={{ color: "black" }}
+            <div>
+              <div className={locationName==="/myitem/accounts/customer" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+                <Link to="accounts/customer">
+                <i
+                  className="mx-2  mt-0 p-0 fas fa-angle-right"
+                  style={{ color: "#8b8589" }}
+                ></i>
+                <span
+                  className="m-0 p-0 text-left"
+                  style={{ fontSize: "15px", color: "#8b8589" }}
                 >
-                  <div>
-                    <p className="m-0 p-0 fw-400" style={{ color: "#696969" }}>
-                      Image
-                    </p>
-                  </div>
-                  <div>
-                    <p className="m-0 p-0" style={{ color: "#696969" }}>
-                      info
-                    </p>
-                  </div>
-                  <div>
-                    <p className="m-0 p-0" style={{ color: "#696969" }}>
-                      price
-                    </p>
-                  </div>
-                  <div>
-                    <p className="m-0 p-0" style={{ color: "#696969" }}>
-                      Date added
-                    </p>
-                  </div>
-                  <div>
-                    <p className="m-0 p-0" style={{ color: "#696969" }}>
-                      edit/delete
-                    </p>
-                  </div>
-                </div>
-              </li>
+                  Customer Lists
+                </span>
+                </Link>
+              </div>
+              <div className={locationName==="/myitem/accounts/prospect" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <Link to="accounts/prospect">
+                <i
+                  className="mx-2  mt-0 p-0 fas fa-angle-right"
+                  style={{ color: "#8b8589" }}
+                ></i>
+                <span
+                  className="m-0 p-0 text-left"
+                  style={{ fontSize: "15px", color: "#8b8589" }}
+                >
+                  Prospect Lists
+                </span>
+                </Link>
+              </div>
+              <div className={locationName==="/myitem/accounts/vendor" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <Link to="accounts/vendor">
+                <i
+                  className="mx-2  mt-0 p-0 fas fa-angle-right"
+                  style={{ color: "#8b8589" }}
+                ></i>
+                <span
+                  className="m-0 p-0 text-left"
+                  style={{ fontSize: "15px", color: "#8b8589" }}
+                >
+                  Vendor Lists
+                </span>
+                </Link>
+              </div>
+              <div className={locationName==="/myitem/accounts/sales" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <Link to="accounts/sales">
+                <i
+                  className="mx-2  mt-0 p-0 fas fa-angle-right"
+                  style={{ color: "#8b8589" }}
+                ></i>
+                <span
+                  className="m-0 p-0 text-left"
+                  style={{ fontSize: "15px", color: "#8b8589" }}
+                >
+                  Sales Opportunities
+                </span>
+                </Link>
+              </div>
             </div>
-            <div class="panel-body">
-              <ul
-                className="list-group scrollspy-example"
-                data-bs-spy="scroll"
-                data-bs-offset="0"
-                tabindex="0"
-              >
-                {alldata.length === 0 ? (
-                  <Box
-                    className="w-100 vh-50 justify-content-center align-items-center"
-                    sx={{ display: "flex" }}
-                  >
-                    <CircularProgress />
-                  </Box>
-                ) : (
-                  alldata.map((item, index) => (
-                    <motion.li
-                      initial={{ opacity: 0.5, scale: 0.5 }}
-                      animate={{ y: 0, opacity: 1, scale: 1 }}
-                      exit={{ scale: 0.5, opacity: 0 }}
-                      key={index}
-                      className="list-group-item col-12 "
-                    >
-                      <MyItemCard
-                        item={item}
-                        id={id}
-                        isAdd={isAdd}
-                        setisAdd={setisAdd}
-                        editItem={editItem}
-                        removeItem={removeItem}
-                      />
-                    </motion.li>
-                  ))
-                )}
-              </ul>
+          </div>
+
+          <div className="mt-2 p-0 py-2" style={{ backgroundColor: "#f4f0ec" }}>
+            <div className="d-flex m-0 mx-2 p-0 align-items-center justify-content-start">
+              <i className="fa-2x fas fa-warehouse-full"></i>
+              <span className="mx-3 fs-3 fw-bold">Orders</span>
             </div>
-          </AnimatePresence>
-        </div>
-        <div className="col-3 mt-5">
-          you have {alldata.length} items
+            <div>
+              <div className={locationName==="/myitem/orders/salesorder" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+                <Link to="orders/salesorder">
+                <i
+                  className="mx-2  mt-0 p-0 fas fa-angle-right"
+                  style={{ color: "#8b8589" }}
+                ></i>
+                <span
+                  className="m-0 p-0 text-left"
+                  style={{ fontSize: "15px", color: "#8b8589" }}
+                >
+                  Sales Orders
+                </span>
+                </Link>
+              </div>
+              <div className={locationName==="/myitem/orders/purchase" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <Link to="orders/purchase">
+                <i
+                  className="mx-2  mt-0 p-0 fas fa-angle-right"
+                  style={{ color: "#8b8589" }}
+                ></i>
+                <span
+                  className="m-0 p-0 text-left"
+                  style={{ fontSize: "15px", color: "#8b8589" }}
+                >
+                  Purchase Orders
+                </span>
+                </Link>
+              </div>
+              <div className={locationName==="/myitem/orders/quotation" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <Link to="orders/quotation">
+                <i
+                  className="mx-2  mt-0 p-0 fas fa-angle-right"
+                  style={{ color: "#8b8589" }}
+                ></i>
+                <span
+                  className="m-0 p-0 text-left"
+                  style={{ fontSize: "15px", color: "#8b8589" }}
+                >
+                  Quotations
+                </span>
+                </Link>
+              </div>
+              <div className={locationName==="/myitem/orders/invoices" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <Link to="orders/invoices">
+                <i
+                  className="mx-2  mt-0 p-0 fas fa-angle-right"
+                  style={{ color: "#8b8589" }}
+                ></i>
+                <span
+                  className="m-0 p-0 text-left"
+                  style={{ fontSize: "15px", color: "#8b8589" }}
+                >
+                  Invoices
+                </span>
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="mt-2 p-0 py-2" style={{ backgroundColor: "#f4f0ec" }}>
+            <div className="d-flex m-0 mx-2 p-0 align-items-center justify-content-start">
+              <i className="fa-2x fas fa-warehouse-full"></i>
+              <span className="mx-3 fs-3 fw-bold">Inventory</span>
+            </div>
+            <div>
+              <div className={locationName==="/myitem/inventory/inventory" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+                <Link to="inventory/inventory">
+                <i
+                  className="mx-2  mt-0 p-0 fas fa-angle-right"
+                  style={{ color: "#8b8589" }}
+                ></i>
+                <span
+                  className="m-0 p-0 text-left"
+                  style={{ fontSize: "15px", color: "#8b8589" }}
+                >
+                  Inventory Lists
+                </span>
+                </Link>
+              </div>
+              <div className={locationName==="/myitem/inventory/stock" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <Link to="inventory/stock">
+                <i
+                  className="mx-2  mt-0 p-0 fas fa-angle-right"
+                  style={{ color: "#8b8589" }}
+                ></i>
+                <span
+                  className="m-0 p-0 text-left"
+                  style={{ fontSize: "15px", color: "#8b8589" }}
+                >
+                  Stock Transfers
+                </span>
+                </Link>
+              </div>
+              <div className={locationName==="/myitem/inventory/categories" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <Link to="inventory/categories">
+                <i
+                  className="mx-2  mt-0 p-0 fas fa-angle-right"
+                  style={{ color: "#8b8589" }}
+                ></i>
+                <span
+                  className="m-0 p-0 text-left"
+                  style={{ fontSize: "15px", color: "#8b8589" }}
+                >
+                  Manage Categories{" "}
+                </span>
+                </Link>
+              </div>
+              <div className={locationName==="/myitem/inventory/attributes" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <Link to="inventory/attributes">
+                <i
+                  className="mx-2  mt-0 p-0 fas fa-angle-right"
+                  style={{ color: "#8b8589" }}
+                ></i>
+                <span
+                  className="m-0 p-0 text-left"
+                  style={{ fontSize: "15px", color: "#8b8589" }}
+                >
+                  Manage Attributes{" "}
+                </span>
+                </Link>
+              </div>
+              <div className={locationName==="/myitem/inventory/lz" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <Link to="inventory/lz">
+                <i
+                  className="mx-2  mt-0 p-0 fas fa-angle-right"
+                  style={{ color: "#8b8589" }}
+                ></i>
+                <span
+                  className="m-0 p-0 text-left"
+                  style={{ fontSize: "15px", color: "#8b8589" }}
+                >
+                  Location & ZOnes{" "}
+                </span>
+                </Link>
+              </div>
+            </div>
+          </div>
+          </div>
+        </motion.div>
+        </AnimatePresence>
+        <div className="col-10">
+          <Outlet/>
         </div>
       </div>
 
@@ -345,6 +288,11 @@ const MyItem = () => {
         <i className="fas fa-spinner fa-pulse"></i>
         <i className="fas fa-stroopwafel fa-spin"></i>
       </div>
+     
+
+
+      {/* <!-- Modal --> */}
+      
     </div>
     // <div>
     //   <div className="container">

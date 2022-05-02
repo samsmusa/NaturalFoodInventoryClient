@@ -80,7 +80,7 @@ const Categories = ({setalldata, alldata}) => {
 
         <div className="ListOfCourses">
           {catName.map((e, index) => (
-            <div key={index} className="m-0">
+            <div key={index+"19"} className="m-0">
               <label className="mx-1">
                 <input
                   className="mx-1"
@@ -95,8 +95,8 @@ const Categories = ({setalldata, alldata}) => {
         </div>
         <input
           type="submit"
-          className="active-category text-center cb"
-          style={{ backgroundColor: "#FF4500", border: "none" }}
+          className="active-category text-center cb table-heading"
+          style={{ border: "none" }}
           onClick={seeAll}
           value={toggle ? "SEE-ALL" : "Collapse"}
         />
@@ -124,7 +124,7 @@ const Categories = ({setalldata, alldata}) => {
 
       <div className="CategoriesSlider">
         {catName.map((e, index) => (
-          <p key={index} className="Sactive-categoryy">
+          <p key={index+'jk'} className="Sactive-categoryy">
             {e}
           </p>
         ))}
