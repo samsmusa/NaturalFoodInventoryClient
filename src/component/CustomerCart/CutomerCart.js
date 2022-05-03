@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 const CutomerCart = ({ user }) => {
   return (
     <div>
-      <div className="d-flex p-2 justify-content-between align-items-center bg-light">
-        <div className="d-flex justify-content-between ">
+      <div className="row p-2 justify-content-between align-items-center bg-light">
+        <div className=" col-4 d-flex justify-content-start ">
           <Link className="productLink" to="/">
             <div className="CardImageParent">
               <img
@@ -31,14 +31,13 @@ const CutomerCart = ({ user }) => {
             </p>
           </div>
         </div>
-        <div>
+        <div className=" col-2">
           <p className="m-0 p-0">{user?.totalItemBuy}</p>
         </div>
-        <div>
+        <div className=" col-2">
           <p className="m-0 p-0">$ {user?.totalInvest}</p>
         </div>
-        <div>{/* <p className="m-0 p-0">{userEvent.name}</p> */}</div>
-        <div>{user?.type}</div>
+        <div className=" col-2">{user?.type}</div>
       </div>
     </div>
   );

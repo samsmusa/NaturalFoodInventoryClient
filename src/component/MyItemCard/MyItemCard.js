@@ -30,37 +30,46 @@ const MyCourseCard = ({ item, id, isAdd, setisAdd, editItem, removeItem }) => {
       <div
         className={
           id == item._id
-            ? "d-flex p-2 justify-content-between align-items-center bgc-item "
-            : "d-flex p-2 justify-content-between align-items-center bg-light"
+            ? "row p-2 justify-content-between align-items-center bgc-item "
+            : "row p-2 justify-content-between align-items-center bg-light"
         }
       >
-        
-        <div className="d-flex justify-content-between "> 
-        <Link className="productLink" to="/">
-          <div className="CardImageParent">
-            <img src={image} className="img-fluid" style={{width:"100px", height:"80px"}} alt="course" />
-          </div>
-        </Link>
+        <div className="col-4 d-flex justify-content-start ">
+          <Link className="productLink" to="/">
+            <div className="CardImageParent">
+              <img
+                src={image}
+                className="img-fluid"
+                style={{ width: "100px", height: "80px" }}
+                alt="course"
+              />
+            </div>
+          </Link>
 
-        <div className="product">
-          <p className="CourseTitle m-0">{item.name}</p>
-            <p className="m-0 p-0" style={{fontSize:"10px"}}>{item.catagory}</p>
-            <p className="m-0 p-0" style={{fontSize:"10px"}}>{item.catagory}</p>
+          <div className="product">
+            <p className="CourseTitle m-0">{item.name}</p>
+            <p className="m-0 p-0" style={{ fontSize: "10px" }}>
+              {item.catagory}
+            </p>
+            <p className="m-0 p-0" style={{ fontSize: "10px" }}>
+              {item.catagory}
+            </p>
+          </div>
         </div>
-        </div> 
-        <div>
-        <p className="m-0 p-0">{item.price}</p>
+        <div className="col-2">
+          <p className="m-0 p-0">{item.price}</p>
         </div>
-        <div>
+        <div className="col-2">
           <p className="m-0 p-0">sun, 1 july, 2020</p>
         </div>
-        <div>
-        <motion.i
+        <div className="col-2">
+          <motion.i
             whileHover={{ scale: 1.1 }}
             className={hovered ? " m-2 fas fa-cog fa-spin" : " m-2 fas fa-cog"}
             onMouseEnter={toggleHover}
             onMouseLeave={toggleHover}
-            data-bs-toggle="modal" data-bs-target="#exampleModal"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
             style={
               !(id == item._id)
                 ? { color: "orange", cursor: "pointer" }

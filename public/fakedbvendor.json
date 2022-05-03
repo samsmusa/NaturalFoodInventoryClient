@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "name": "cerulean",
+        "year": 2000,
+        "store":"departmental",
+        "sold":420,
+        "revenue":4987,
+        "owner":"malik hasan",
+        "phone":"01231232313",
+        "color": "#98B2D1",
+        "pantone_value": "15-4020"
+    },
+    {
+        "id": 2,
+        "name": "fuchsia rose",
+        "year": 2001,
+        "store":"departmental ",
+        "sold":420,
+        "revenue":4987,
+        "owner":"kasem sarowar",
+        "phone":"01783123223",
+        "color": "#C74375",
+        "pantone_value": "17-2031"
+    },
+    {
+        "id": 3,
+        "name": "true red",
+        "year": 2002,
+        "store":"medicin",
+        "sold":20,
+        "revenue":987,
+        "owner":"ahsam manowar",
+        "phone":"0193123376",
+        "color": "#BF1932",
+        "pantone_value": "19-1664"
+    },
+    {
+        "id": 4,
+        "name": "aqua sky",
+        "year": 2003,
+        "store":"departmental",
+        "sold":42,
+        "revenue":498,
+        "owner":"Billah mank",
+        "phone":"0156312323",
+        "color": "#7BC4C4",
+        "pantone_value": "14-4811"
+    },
+    {
+        "id": 5,
+        "name": "tigerlily",
+        "year": 2004,
+        "store":"super-shop",
+        "sold":520,
+        "revenue":4987,
+        "owner":"manosh kazan",
+        "phone":"01531232453",
+        "color": "#E2583E",
+        "pantone_value": "17-1456"
+    },
+    {
+        "id": 6,
+        "name": "blue turquoise",
+        "year": 2005,
+        "store":"grosary",
+        "sold":40,
+        "revenue":2098,
+        "owner":"manik munshi",
+        "phone":"01312323138",
+        "color": "#53B0AE",
+        "pantone_value": "15-5217"
+    }
+]
