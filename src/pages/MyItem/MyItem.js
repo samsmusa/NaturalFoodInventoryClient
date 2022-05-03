@@ -22,6 +22,12 @@ import useComponentVisible from "../../component/useComponentVisible/useComponen
 //   console.log(new Date(timestamp.seconds*1000))
 
 const MyItem = () => {
+  const goToTop = () => {
+    document.documentElement.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
   // hadnle user
   const [user, loading, error] = useAuthState(auth);
 
@@ -68,7 +74,7 @@ const MyItem = () => {
               <span className="mx-3 fs-3 fw-bold">Accounts</span>
             </div>
             <div>
-              <div className={locationName==="/myitem/accounts/customer" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <div className={locationName==="/myitem/accounts/customer" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"} onClick={goToTop}>
                 <Link to="accounts/customer">
                 <i
                   className="mx-2  mt-0 p-0 fas fa-angle-right"
@@ -82,7 +88,7 @@ const MyItem = () => {
                 </span>
                 </Link>
               </div>
-              <div className={locationName==="/myitem/accounts/prospect" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <div className={locationName==="/myitem/accounts/prospect" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"} onClick={goToTop}>
               <Link to="accounts/prospect">
                 <i
                   className="mx-2  mt-0 p-0 fas fa-angle-right"
@@ -96,7 +102,7 @@ const MyItem = () => {
                 </span>
                 </Link>
               </div>
-              <div className={locationName==="/myitem/accounts/vendor" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <div className={locationName==="/myitem/accounts/vendor" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"} onClick={goToTop}>
               <Link to="accounts/vendor">
                 <i
                   className="mx-2  mt-0 p-0 fas fa-angle-right"
@@ -110,7 +116,7 @@ const MyItem = () => {
                 </span>
                 </Link>
               </div>
-              <div className={locationName==="/myitem/accounts/sales" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <div className={locationName==="/myitem/accounts/sales" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"} onClick={goToTop}>
               <Link to="accounts/sales">
                 <i
                   className="mx-2  mt-0 p-0 fas fa-angle-right"
@@ -133,7 +139,7 @@ const MyItem = () => {
               <span className="mx-3 fs-3 fw-bold">Orders</span>
             </div>
             <div>
-              <div className={locationName==="/myitem/orders/salesorder" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <div className={locationName==="/myitem/orders/salesorder" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"} onClick={goToTop}>
                 <Link to="orders/salesorder">
                 <i
                   className="mx-2  mt-0 p-0 fas fa-angle-right"
@@ -147,7 +153,7 @@ const MyItem = () => {
                 </span>
                 </Link>
               </div>
-              <div className={locationName==="/myitem/orders/purchase" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <div className={locationName==="/myitem/orders/purchase" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"} onClick={goToTop}>
               <Link to="orders/purchase">
                 <i
                   className="mx-2  mt-0 p-0 fas fa-angle-right"
@@ -161,7 +167,7 @@ const MyItem = () => {
                 </span>
                 </Link>
               </div>
-              <div className={locationName==="/myitem/orders/quotation" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <div className={locationName==="/myitem/orders/quotation" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"} onClick={goToTop}>
               <Link to="orders/quotation">
                 <i
                   className="mx-2  mt-0 p-0 fas fa-angle-right"
@@ -175,7 +181,7 @@ const MyItem = () => {
                 </span>
                 </Link>
               </div>
-              <div className={locationName==="/myitem/orders/invoices" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <div className={locationName==="/myitem/orders/invoices" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"} onClick={goToTop}>
               <Link to="orders/invoices">
                 <i
                   className="mx-2  mt-0 p-0 fas fa-angle-right"
@@ -197,7 +203,7 @@ const MyItem = () => {
               <span className="mx-3 fs-3 fw-bold">Inventory</span>
             </div>
             <div>
-              <div className={locationName==="/myitem/inventory/inventory" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <div className={locationName==="/myitem/inventory/inventory" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"} onClick={goToTop}>
                 <Link to="inventory/inventory">
                 <i
                   className="mx-2  mt-0 p-0 fas fa-angle-right"
@@ -211,7 +217,7 @@ const MyItem = () => {
                 </span>
                 </Link>
               </div>
-              <div className={locationName==="/myitem/inventory/stock" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <div className={locationName==="/myitem/inventory/stock" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"} onClick={goToTop}>
               <Link to="inventory/stock">
                 <i
                   className="mx-2  mt-0 p-0 fas fa-angle-right"
@@ -225,7 +231,7 @@ const MyItem = () => {
                 </span>
                 </Link>
               </div>
-              <div className={locationName==="/myitem/inventory/categories" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <div className={locationName==="/myitem/inventory/categories" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"} onClick={goToTop}>
               <Link to="inventory/categories">
                 <i
                   className="mx-2  mt-0 p-0 fas fa-angle-right"
@@ -239,7 +245,7 @@ const MyItem = () => {
                 </span>
                 </Link>
               </div>
-              <div className={locationName==="/myitem/inventory/attributes" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <div className={locationName==="/myitem/inventory/attributes" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"} onClick={goToTop}>
               <Link to="inventory/attributes">
                 <i
                   className="mx-2  mt-0 p-0 fas fa-angle-right"
@@ -253,7 +259,7 @@ const MyItem = () => {
                 </span>
                 </Link>
               </div>
-              <div className={locationName==="/myitem/inventory/lz" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"}>
+              <div className={locationName==="/myitem/inventory/lz" ? "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab  select-side-tab" : "mx-3 my-2 text-dark d-flex align-items-center justify-content-start side-tab"} onClick={goToTop}>
               <Link to="inventory/lz">
                 <i
                   className="mx-2  mt-0 p-0 fas fa-angle-right"
