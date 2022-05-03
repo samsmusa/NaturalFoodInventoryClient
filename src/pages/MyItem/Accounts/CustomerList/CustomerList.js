@@ -77,7 +77,7 @@ const CustomerList = () => {
     },[selectDivision])
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
+    fetch("https://raw.githubusercontent.com/samsmusa/natural--inventory/master/public/fakedbuser.json")
       .then((res) => res.json())
       .then((res) => {setAllData(res);setData(res)});
   }, [data]);
