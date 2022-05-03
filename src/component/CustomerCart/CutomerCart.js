@@ -35,7 +35,7 @@ const CutomerCart = ({ user }) => {
           <p className="m-0 p-0">{user?.totalItemBuy}</p>
         </div>
         <div>
-          <p className="m-0 p-0">{user?.totalInvest}</p>
+          <p className="m-0 p-0">$ {user?.totalInvest}</p>
         </div>
         <div>{/* <p className="m-0 p-0">{userEvent.name}</p> */}</div>
         <div>{user?.type}</div>

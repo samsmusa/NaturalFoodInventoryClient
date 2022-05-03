@@ -62,48 +62,59 @@ const CustomerList = () => {
   const [alldata, setAllData] = useState([]);
   const [data, setData] = useState([]);
   const [divisions, setDivisions] = LoadDivisions();
-  const [selectDistrict, setselectDistrict] = useState("select")
-  const [selectDivision, setSelecteDivision] = useState("")
-  const [userType, setUserType] = useState('all')
-  
-//   const [district, setDistrict] = LoadDistrict(selectDivision, selectDistrict);
+  const [selectDistrict, setselectDistrict] = useState("select");
+  const [selectDivision, setSelecteDivision] = useState("");
+  const [userType, setUserType] = useState("all");
 
+  //   const [district, setDistrict] = LoadDistrict(selectDivision, selectDistrict);
 
-  const [district, setDistrict] = useState([])
-    useEffect(()=>{
-        fetch(`https://bdapis.herokuapp.com/api/v1.1/division/${selectDistrict}`)
-        .then(res=>res.json())
-        .then(result=>setDistrict(result.data))
-    },[selectDivision])
+  const [district, setDistrict] = useState([]);
+  useEffect(() => {
+    fetch(`https://bdapis.herokuapp.com/api/v1.1/division/${selectDistrict}`)
+      .then((res) => res.json())
+      .then((result) => setDistrict(result.data));
+  }, [selectDivision]);
 
   useEffect(() => {
-    fetch("https://raw.githubusercontent.com/samsmusa/natural--inventory/master/public/fakedbuser.json")
+    fetch(
+      "https://raw.githubusercontent.com/samsmusa/natural--inventory/master/public/fakedbuser.json"
+    )
       .then((res) => res.json())
-      .then((res) => {setAllData(res);setData(res)});
-  }, [data]);
+      .then((res) => {
+        setAllData(res);
+        setData(res);
+      });
+  }, []);
 
   const RefreshItem = () => {
     setAllData([]);
-    setUserType("all")
+    setUserType("all");
   };
 
   // filter users with location
-  useEffect(()=>{
-    setAllData(data.filter(e=>(e.division === selectDivision )));
-    if(selectDistrict !== 'select'){
-    setAllData(data.filter(e=> e=>(e.division === selectDivision && e.district===selectDistrict)));
+  useEffect(() => {
+    if (selectDistrict !== "select") {
+      setAllData(
+        data.filter(
+          (e) =>
+            e.address.division === selectDivision.toLowerCase() &&
+            e.address.district === selectDistrict.toLowerCase()
+        )
+      );
     }
-  },[selectDivision,selectDistrict]);
-
+  }, [selectDivision, selectDistrict]);
 
   // filter user by type
-  const hadleUserType = (type)=>{
-    setUserType(type)
-  }
-  useEffect(()=>{
-    setAllData(data.filter(e=> e.type===userType))
-  },[userType]) 
-
+  const hadleUserType = (type) => {
+    setUserType(type);
+  };
+  useEffect(() => {
+    if (userType === "all") {
+      setAllData(data);
+    } else {
+      setAllData(data.filter((e) => e.type === userType));
+    }
+  }, [userType]);
 
   return (
     <div className="row">
@@ -153,12 +164,12 @@ const CustomerList = () => {
                 </div>
                 <div>
                   <p className="m-0 p-0" style={{ color: "#696969" }}>
-                    price
+                    Item Buy from your store
                   </p>
                 </div>
                 <div>
                   <p className="m-0 p-0" style={{ color: "#696969" }}>
-                    Date added
+                    Total invest
                   </p>
                 </div>
                 <div>
@@ -185,7 +196,7 @@ const CustomerList = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0.5 }}
                     transition={{ ease: "easeIn", duration: 0.2 }}
-                    key={index+'1e3ra21'}
+                    key={index + "1e3ra21"}
                     className="list-group-item col-12 "
                   >
                     <CustomerCart key={index} user={item} />
@@ -203,13 +214,17 @@ const CustomerList = () => {
             Filter with Type
           </div>
           <div class="card-body">
-          <motion.div
-              className={userType == 'all' ? "mx-auto mt-0 text-dark d-flex align-items-center justify-content-between select-side-tab w-75" : "mx-auto mt-0 text-dark d-flex align-items-center justify-content-between w-75"}
+            <motion.div
+              className={
+                userType == "all"
+                  ? "mx-auto mt-0 text-dark d-flex align-items-center justify-content-between select-side-tab w-75"
+                  : "mx-auto mt-0 text-dark d-flex align-items-center justify-content-between w-75"
+              }
               initial="rest"
               whileHover="hover"
               animate="rest"
-              style={{cursor:"pointer"}}
-              onClick={()=>hadleUserType('all')}
+              style={{ cursor: "pointer" }}
+              onClick={() => hadleUserType("all")}
             >
               <motion.i
                 variants={leftslashMotion}
@@ -231,12 +246,16 @@ const CustomerList = () => {
               ></motion.i>
             </motion.div>
             <motion.div
-              className={userType == 'standard' ? "mx-auto mt-0 text-dark d-flex align-items-center justify-content-between select-side-tab w-75" : "mx-auto mt-0 text-dark d-flex align-items-center justify-content-between w-75"}
+              className={
+                userType == "standard"
+                  ? "mx-auto mt-0 text-dark d-flex align-items-center justify-content-between select-side-tab w-75"
+                  : "mx-auto mt-0 text-dark d-flex align-items-center justify-content-between w-75"
+              }
               initial="rest"
               whileHover="hover"
               animate="rest"
-              style={{cursor:"pointer"}}
-              onClick={()=>hadleUserType('standard')}
+              style={{ cursor: "pointer" }}
+              onClick={() => hadleUserType("standard")}
             >
               <motion.i
                 variants={leftslashMotion}
@@ -244,7 +263,7 @@ const CustomerList = () => {
                 className="mx-2  mt-0 p-0 fas fa-angle-right"
               ></motion.i>
 
-<motion.span
+              <motion.span
                 variants={textMotion}
                 className="m-0 p-0 text-left"
                 style={{ fontSize: "15px", color: "#8b8589" }}
@@ -258,12 +277,16 @@ const CustomerList = () => {
               ></motion.i>
             </motion.div>
             <motion.div
-              className={userType == 'modarate' ? "mx-auto mt-0 text-dark d-flex align-items-center justify-content-between select-side-tab w-75" : "mx-auto mt-0 text-dark d-flex align-items-center justify-content-between w-75"}
+              className={
+                userType === "modarate"
+                  ? "mx-auto mt-0 text-dark d-flex align-items-center justify-content-between select-side-tab w-75"
+                  : "mx-auto mt-0 text-dark d-flex align-items-center justify-content-between w-75"
+              }
               initial="rest"
               whileHover="hover"
               animate="rest"
-              style={{cursor:"pointer"}}
-              onClick={()=>hadleUserType('modarate')}
+              style={{ cursor: "pointer" }}
+              onClick={() => hadleUserType("modarate")}
             >
               <motion.i
                 variants={leftslashMotion}
@@ -285,12 +308,16 @@ const CustomerList = () => {
               ></motion.i>
             </motion.div>
             <motion.div
-              className={userType == 'premium' ? "mx-auto mt-0 text-dark d-flex align-items-center justify-content-between select-side-tab w-75" : "mx-auto mt-0 text-dark d-flex align-items-center justify-content-between w-75"}
+              className={
+                userType == "premium"
+                  ? "mx-auto mt-0 text-dark d-flex align-items-center justify-content-between select-side-tab w-75"
+                  : "mx-auto mt-0 text-dark d-flex align-items-center justify-content-between w-75"
+              }
               initial="rest"
               whileHover="hover"
               animate="rest"
-              style={{cursor:"pointer"}}
-              onClick={()=>hadleUserType('premium')}
+              style={{ cursor: "pointer" }}
+              onClick={() => hadleUserType("premium")}
             >
               <motion.i
                 variants={leftslashMotion}
@@ -321,7 +348,7 @@ const CustomerList = () => {
             Filter with location
           </div>
           <div class="card-body mt-3">
-          <motion.div
+            <motion.div
               className="mx-auto mt-0 text-dark d-flex align-items-center justify-content-between select-side-tab-blue table-heading "
               initial="rest"
               whileHover="hover"
@@ -332,25 +359,27 @@ const CustomerList = () => {
                 className="mx-2  mt-0 p-0 fas fa-angle-right"
               ></motion.i>
 
-              
               <select
-                        value={selectDivision}
-                        className="form-control"
-                        onChange={(e) => {setSelecteDivision(e.target.value); setselectDistrict(e.target.value);}}
-                      >
-                        {divisions.map((itm, index) => (
-                          <option key={index+'432'} value={itm.division}>
-                            {itm.division}
-                          </option>
-                        ))}
-                      </select>
+                value={selectDivision}
+                className="form-control"
+                onChange={(e) => {
+                  setSelecteDivision(e.target.value);
+                  setselectDistrict(e.target.value);
+                }}
+              >
+                {divisions.map((itm, index) => (
+                  <option key={index + "432"} value={itm.division}>
+                    {itm.division}
+                  </option>
+                ))}
+              </select>
               <motion.i
                 // style={{ color: "#8b8589" }}
                 variants={rightslashMotion}
                 className="mx-2  mt-0 p-0 fas fa-angle-right"
               ></motion.i>
             </motion.div>
-          <motion.div
+            <motion.div
               className="mx-auto mt-0 text-dark d-flex align-items-center justify-content-between select-side-tab-blue table-heading "
               initial="rest"
               whileHover="hover"
@@ -361,18 +390,17 @@ const CustomerList = () => {
                 className="mx-2  mt-0 p-0 fas fa-angle-right"
               ></motion.i>
 
-              
               <select
-                        value={selectDistrict}
-                        className="form-control"
-                        onChange={(e) => setselectDistrict(e.target.value)}
-                      >
-                        {district.map((itm, index) => (
-                          <option key={index+'4ed32'} value={itm.district}>
-                            {itm.district}
-                          </option>
-                        ))}
-                      </select>
+                value={selectDistrict}
+                className="form-control"
+                onChange={(e) => setselectDistrict(e.target.value)}
+              >
+                {district.map((itm, index) => (
+                  <option key={index + "4ed32"} value={itm.district}>
+                    {itm.district}
+                  </option>
+                ))}
+              </select>
               <motion.i
                 // style={{ color: "#8b8589" }}
                 variants={rightslashMotion}
