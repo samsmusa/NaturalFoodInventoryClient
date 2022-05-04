@@ -7,6 +7,7 @@
             "id":4253
         },
         "price": 109.95,
+        "status":0,
         "category": "milk",
         "rating": {
             "rate": 3.9,
@@ -21,6 +22,7 @@
             "id":4354
         },
         "price": 22.3,
+        "status":0,
         "category": "eggs",
         "rating": {
             "rate": 4.1,
@@ -35,6 +37,7 @@
             "id":4355
         },
         "price": 55.99,
+        "status":0,
         "category": "vegetables",
         "rating": {
             "rate": 4.7,
@@ -49,6 +52,7 @@
             "id":4356
         },
         "price": 15.99,
+        "status":0,
         "category": "vegetables",
         "rating": {
             "rate": 2.1,
@@ -63,6 +67,7 @@
             "id":4357
         },
         "price": 695,
+        "status":0,
         "category": "fish and shellfish",
         "rating": {
             "rate": 4.6,
@@ -77,6 +82,7 @@
             "id":4358
         },
         "price": 168,
+        "status":0,
         "category": "fish and shellfish",
         "rating": {
             "rate": 3.9,
@@ -91,6 +97,7 @@
             "id":4359
         },
         "price": 9.99,
+        "status":1,
         "category": "fish and shellfish",
         "rating": {
             "rate": 3,
@@ -105,6 +112,7 @@
             "id":4360
         },
         "price": 10.99,
+        "status":1,
         "category": "vegetables",
         "rating": {
             "rate": 1.9,
@@ -119,6 +127,7 @@
             "id":4361
         },
         "price": 64,
+        "status":1,
         "category": "fish and shellfish",
         "rating": {
             "rate": 3.3,
@@ -133,6 +142,7 @@
             "id":4362
         },
         "price": 109,
+        "status":1,
         "category": "fruits",
         "rating": {
             "rate": 2.9,
@@ -147,6 +157,7 @@
             "id":4363
         },
         "price": 109,
+        "status":1,
         "category": "sweets and sugars",
         "rating": {
             "rate": 4.8,
@@ -161,6 +172,7 @@
             "id":4364
         },
         "price": 114,
+        "status":1,
         "category": "Sweets and Sugars",
         "rating": {
             "rate": 4.8,
@@ -175,6 +187,7 @@
             "id":4365
         },
         "price": 599,
+        "status":1,
         "category": "Sweets and Sugars",
         "rating": {
             "rate": 2.9,
@@ -189,6 +202,7 @@
             "id":4366
         },
         "price": 999.99,
+        "status":1,
         "category": "sweets and sugars",
         "rating": {
             "rate": 2.2,
@@ -203,6 +217,7 @@
             "id":4367
         },
         "price": 56.99,
+        "status":1,
         "category": "beverage",
         "rating": {
             "rate": 2.6,
@@ -217,6 +232,7 @@
             "id":4368
         },
         "price": 29.95,
+        "status":1,
         "category": "beverage",
         "rating": {
             "rate": 2.9,
@@ -231,6 +247,7 @@
             "id":4370
         },
         "price": 39.99,
+        "status":1,
         "category": "beverage",
         "rating": {
             "rate": 3.8,
@@ -245,6 +262,7 @@
             "id":4371
         },
         "price": 9.85,
+        "status":1,
         "category": "eggs",
         "rating": {
             "rate": 4.7,
