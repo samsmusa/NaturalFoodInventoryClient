@@ -2,6 +2,10 @@
     {
         "id": 1,
         "title": "Dano baby Milk",
+        "customer":{
+            "name":"zilonexi",
+            "id":4253
+        },
         "price": 109.95,
         "category": "milk",
         "rating": {
@@ -12,6 +16,10 @@
     {
         "id": 2,
         "title": "jashim farm eggs",
+        "customer":{
+            "name":"kamal jeb",
+            "id":4354
+        },
         "price": 22.3,
         "category": "eggs",
         "rating": {
@@ -22,6 +30,10 @@
     {
         "id": 3,
         "title": "sumon mia potato",
+        "customer":{
+            "name":"jamal khoshgu",
+            "id":4355
+        },
         "price": 55.99,
         "category": "vegetables",
         "rating": {
@@ -32,6 +44,10 @@
     {
         "id": 4,
         "title": "sumon mia tomato",
+        "customer":{
+            "name":"jamil chodury",
+            "id":4356
+        },
         "price": 15.99,
         "category": "vegetables",
         "rating": {
@@ -42,6 +58,10 @@
     {
         "id": 5,
         "title": "suborno agro fish",
+        "customer":{
+            "name":"karim ",
+            "id":4357
+        },
         "price": 695,
         "category": "fish and shellfish",
         "rating": {
@@ -52,6 +72,10 @@
     {
         "id": 6,
         "title": "sodium gold fish",
+        "customer":{
+            "name":"ajgor",
+            "id":4358
+        },
         "price": 168,
         "category": "fish and shellfish",
         "rating": {
@@ -62,6 +86,10 @@
     {
         "id": 7,
         "title": "noman agro katla fish",
+        "customer":{
+            "name":"akil jamshed",
+            "id":4359
+        },
         "price": 9.99,
         "category": "fish and shellfish",
         "rating": {
@@ -72,6 +100,10 @@
     {
         "id": 8,
         "title": "mirashorai agro vegetables",
+        "customer":{
+            "name":"jalmal akhond",
+            "id":4360
+        },
         "price": 10.99,
         "category": "vegetables",
         "rating": {
@@ -82,6 +114,10 @@
     {
         "id": 9,
         "title": "bella motsho khamar",
+        "customer":{
+            "name":"shanto munshi",
+            "id":4361
+        },
         "price": 64,
         "category": "fish and shellfish",
         "rating": {
@@ -92,6 +128,10 @@
     {
         "id": 10,
         "title": "fawmi fruits",
+        "customer":{
+            "name":"sakil chodury",
+            "id":4362
+        },
         "price": 109,
         "category": "fruits",
         "rating": {
@@ -102,6 +142,10 @@
     {
         "id": 11,
         "title": "vholamoira sweets",
+        "customer":{
+            "name":"simlan asma",
+            "id":4363
+        },
         "price": 109,
         "category": "sweets and sugars",
         "rating": {
@@ -112,6 +156,10 @@
     {
         "id": 12,
         "title": "kachamoric sweets",
+        "customer":{
+            "name":"suborna masud",
+            "id":4364
+        },
         "price": 114,
         "category": "Sweets and Sugars",
         "rating": {
@@ -122,6 +170,10 @@
     {
         "id": 13,
         "title": "matrivhandar sweets",
+        "customer":{
+            "name":"sabrina kazi",
+            "id":4365
+        },
         "price": 599,
         "category": "Sweets and Sugars",
         "rating": {
@@ -132,6 +184,10 @@
     {
         "id": 14,
         "title": "lal mia jilabi",
+        "customer":{
+            "name":"faruk omar",
+            "id":4366
+        },
         "price": 999.99,
         "category": "sweets and sugars",
         "rating": {
@@ -142,6 +198,10 @@
     {
         "id": 15,
         "title": "coca cola",
+        "customer":{
+            "name":"mushkil ahsan",
+            "id":4367
+        },
         "price": 56.99,
         "category": "beverage",
         "rating": {
@@ -152,6 +212,10 @@
     {
         "id": 16,
         "title": "RC drink",
+        "customer":{
+            "name":"muskan chodury",
+            "id":4368
+        },
         "price": 29.95,
         "category": "beverage",
         "rating": {
@@ -162,6 +226,10 @@
     {
         "id": 17,
         "title": "pepsi drink",
+        "customer":{
+            "name":"udey mok",
+            "id":4370
+        },
         "price": 39.99,
         "category": "beverage",
         "rating": {
@@ -172,6 +240,10 @@
     {
         "id": 18,
         "title": "jalal eggs",
+        "customer":{
+            "name":"salaar musk",
+            "id":4371
+        },
         "price": 9.85,
         "category": "eggs",
         "rating": {
