@@ -1,0 +1,182 @@
+[
+    {
+        "id": 1,
+        "title": "Dano baby Milk",
+        "price": 109.95,
+        "category": "milk",
+        "rating": {
+            "rate": 3.9,
+            "count": 120
+        }
+    },
+    {
+        "id": 2,
+        "title": "jashim farm eggs",
+        "price": 22.3,
+        "category": "eggs",
+        "rating": {
+            "rate": 4.1,
+            "count": 259
+        }
+    },
+    {
+        "id": 3,
+        "title": "sumon mia potato",
+        "price": 55.99,
+        "category": "vegetables",
+        "rating": {
+            "rate": 4.7,
+            "count": 500
+        }
+    },
+    {
+        "id": 4,
+        "title": "sumon mia tomato",
+        "price": 15.99,
+        "category": "vegetables",
+        "rating": {
+            "rate": 2.1,
+            "count": 430
+        }
+    },
+    {
+        "id": 5,
+        "title": "suborno agro fish",
+        "price": 695,
+        "category": "fish and shellfish",
+        "rating": {
+            "rate": 4.6,
+            "count": 400
+        }
+    },
+    {
+        "id": 6,
+        "title": "sodium gold fish",
+        "price": 168,
+        "category": "fish and shellfish",
+        "rating": {
+            "rate": 3.9,
+            "count": 70
+        }
+    },
+    {
+        "id": 7,
+        "title": "noman agro katla fish",
+        "price": 9.99,
+        "category": "fish and shellfish",
+        "rating": {
+            "rate": 3,
+            "count": 400
+        }
+    },
+    {
+        "id": 8,
+        "title": "mirashorai agro vegetables",
+        "price": 10.99,
+        "category": "vegetables",
+        "rating": {
+            "rate": 1.9,
+            "count": 100
+        }
+    },
+    {
+        "id": 9,
+        "title": "bella motsho khamar",
+        "price": 64,
+        "category": "fish and shellfish",
+        "rating": {
+            "rate": 3.3,
+            "count": 203
+        }
+    },
+    {
+        "id": 10,
+        "title": "fawmi fruits",
+        "price": 109,
+        "category": "fruits",
+        "rating": {
+            "rate": 2.9,
+            "count": 470
+        }
+    },
+    {
+        "id": 11,
+        "title": "vholamoira sweets",
+        "price": 109,
+        "category": "sweets and sugars",
+        "rating": {
+            "rate": 4.8,
+            "count": 319
+        }
+    },
+    {
+        "id": 12,
+        "title": "kachamoric sweets",
+        "price": 114,
+        "category": "Sweets and Sugars",
+        "rating": {
+            "rate": 4.8,
+            "count": 400
+        }
+    },
+    {
+        "id": 13,
+        "title": "matrivhandar sweets",
+        "price": 599,
+        "category": "Sweets and Sugars",
+        "rating": {
+            "rate": 2.9,
+            "count": 250
+        }
+    },
+    {
+        "id": 14,
+        "title": "lal mia jilabi",
+        "price": 999.99,
+        "category": "sweets and sugars",
+        "rating": {
+            "rate": 2.2,
+            "count": 140
+        }
+    },
+    {
+        "id": 15,
+        "title": "coca cola",
+        "price": 56.99,
+        "category": "beverage",
+        "rating": {
+            "rate": 2.6,
+            "count": 235
+        }
+    },
+    {
+        "id": 16,
+        "title": "RC drink",
+        "price": 29.95,
+        "category": "beverage",
+        "rating": {
+            "rate": 2.9,
+            "count": 340
+        }
+    },
+    {
+        "id": 17,
+        "title": "pepsi drink",
+        "price": 39.99,
+        "category": "beverage",
+        "rating": {
+            "rate": 3.8,
+            "count": 679
+        }
+    },
+    {
+        "id": 18,
+        "title": "jalal eggs",
+        "price": 9.85,
+        "category": "eggs",
+        "rating": {
+            "rate": 4.7,
+            "count": 130
+        }
+    }
+]

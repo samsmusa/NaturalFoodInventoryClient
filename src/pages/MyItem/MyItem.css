@@ -32,12 +32,20 @@
 
 
 } */
-.my-container {
-  padding-top: 57px !important;
+/* .my-container {
+  padding-top: 40px !important;
+} */
+
+/* @media screen and (max-width: 768px) {
+    .my-container { padding-top: 0px !important; }
+} */
+
+body {
+  background-color: #DBDBD9 !important;
 }
 
-@media screen and (max-width: 768px) {
-    .my-container { padding-top: 0px !important; }
+.my-container {
+  background-color: #DBDBD9 !important;
 }
 
 .list-group{

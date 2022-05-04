@@ -50,7 +50,7 @@ const MyItem = () => {
           className="col-2 m-0 p-0"
           style={{ backgroundColor: "#dcdcdc" }}
         >
-          <div className="mt-1 px-2">
+          <div className="px-2 border rounded bg-light">
             <p className="m-0 p-0" style={{ color: "#696969" }}>
               Loged in: {user.email}
             </p>
@@ -68,7 +68,7 @@ const MyItem = () => {
             </p>
           </div>
           <div className="list-group">
-          <div className="mt-2 p-0 py-2" style={{ backgroundColor: "#f4f0ec" }}>
+          <div className="mt-2 p-0 py-2 rounded" style={{ backgroundColor: "#f4f0ec" }}>
             <div className="d-flex m-0 mx-2 p-0 align-items-center justify-content-start">
               <i className="fa-2x fas fa-cog" onMouseEnter={(event)=> event.target.classList.add('fa-spin')} onMouseLeave={(event)=>event.target.classList.remove('fa-spin')}></i>
               <span className="mx-3 fs-3 fw-bold">Accounts</span>
@@ -133,7 +133,7 @@ const MyItem = () => {
             </div>
           </div>
 
-          <div className="mt-2 p-0 py-2" style={{ backgroundColor: "#f4f0ec" }}>
+          <div className="mt-2 p-0 py-2 rounded" style={{ backgroundColor: "#f4f0ec" }}>
             <div className="d-flex m-0 mx-2 p-0 align-items-center justify-content-start">
               <i className="fa-2x fas fa-warehouse-full"></i>
               <span className="mx-3 fs-3 fw-bold">Orders</span>
@@ -197,7 +197,7 @@ const MyItem = () => {
               </div>
             </div>
           </div>
-          <div className="mt-2 p-0 py-2" style={{ backgroundColor: "#f4f0ec" }}>
+          <div className="mt-2 p-0 py-2 rounded" style={{ backgroundColor: "#f4f0ec" }}>
             <div className="d-flex m-0 mx-2 p-0 align-items-center justify-content-start">
               <i className="fa-2x fas fa-warehouse-full"></i>
               <span className="mx-3 fs-3 fw-bold">Inventory</span>

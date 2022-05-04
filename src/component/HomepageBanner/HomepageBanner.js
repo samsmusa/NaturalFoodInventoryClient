@@ -4,7 +4,7 @@ import image from "../../assets/Images/bg1.jpg"
 
 const HomepageBanner = () => {
   return (
-    <div className="mt-5">
+    <div className="">
         <p className="Banner-text">
           Best place to <br />
           learn new things

@@ -13,13 +13,13 @@ const HomeItemCards = ({item}) => {
       exit={{ opacity: 0.5 }}
       transition={{ease:"easeIn" ,duration: 0.2 }}
       className="Course-Cards">
-      <div className="my-card">
+      <div className="my-card rounded  bg-light">
         <NavLink to="/">
           <img src={image} loading="lazy" />
-          <p className="Course-Title">{item.name} </p>
+          <p className="Course-Title m-2">{item.name} </p>
         </NavLink>
-        <p className="Course-Teacher">{item.catagory}</p>
-        <p className="Course-info">
+        <p className="Course-Teacher mx-2">{item.catagory}</p>
+        <p className="Course-info mx-3">
           
           <span className="CourseTimesUpdated">{item.quantity.$numberInt}</span>
           <span className="Course-Price">${item.price.$numberDecimal}</span>

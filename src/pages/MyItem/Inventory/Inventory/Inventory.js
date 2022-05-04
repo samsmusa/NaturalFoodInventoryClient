@@ -268,9 +268,9 @@ const Inventory = () => {
             </div>
           </AnimatePresence>
         </div>
-        <div className="halfs col-3 p-0 m-0">
+        <div className="bg-light rounded border  col-3 p-0 m-0">
           
-          <div className="p-2 pt-5 contents  h-100">
+          <div className="p-2 contents  h-100">
             <Categories alldata={alldata} setalldata={setalldata} />
             
             <div className="border rounded border-primary">
@@ -346,8 +346,8 @@ const Inventory = () => {
                     </div>
                   </div>
                 </div>
-                <div className="row">
-                  <div className="col-md-12">
+                <div className="row ">
+                  <div className="col-md-12 ">
                     <div className="form-group first">
                       <label>Product Category</label>
                       <select

@@ -1,47 +1,59 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
 import Logo from "./../Logo/Logo";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
-import { signOut } from 'firebase/auth';
+import { signOut } from "firebase/auth";
 
 const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);
   return (
-    <nav className=" navbar navbar-expand-lg fixed-top ">
-      <div className="container">
-        <NavLink to="/" className="navbar-brand nav-it">
-          <Logo />
-        </NavLink>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light  sticky-top">
+      <div class="container-fluid justify-content-between">
+        
+          <Link  class="navbar-brand" to='/'>
+            Navbar
+          </Link>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        <div class="collapse navbar-collapse d-flex flex-row-reverse ailgn-items-center" id="navbarNav">
+          <ul class="navbar-nav align-items-center">
+            <li class="nav-item">
+              <Link  class="nav-link active" aria-current="page" to='/myitem'>
+                Manage
+              </Link>
+            </li>
+            
 
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <i className="fa fa-bars" aria-hidden="true"></i>
-        </button>
-
-        <NavLink to="/mycourse" className="nav-it mx-2">
-          My-item
-        </NavLink>
-        <div>
-        {!user ? (
-          <NavLink to="/login" className="nav-it mx-2">
+            {!user ? (
+          <li class="nav-item">
+          <Link  class="nav-link" to='/login'>
             Login
-          </NavLink>
+          </Link>
+        </li>
         ) : (<>
-          <NavLink to="/profile" className="nav-it mx-2">
-            My Profile
-          </NavLink>
-          <input type="submit" className="btn btn-sm text-white" value="Sign Out" style={{backgroundColor: "#FF4500", border: "none" }} onClick={()=>signOut(auth)} />
+          <li class="nav-item">
+              <Link  class="nav-link" to='/profile'>
+                Profile
+              </Link>
+            </li>
+            <li class="nav-item">
+          <input type="submit" className="btn btn-sm text-white table-heading" value="Sign Out" style={{ border: "none" }} onClick={()=>signOut(auth)} />
+          </li>
           </>
         )}
+            
+          </ul>
         </div>
       </div>
     </nav>
@@ -49,3 +61,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+        
