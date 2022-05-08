@@ -23,8 +23,6 @@ const Register = () => {
     useCreateUserWithEmailAndPassword(auth);
   const [signInWithGoogle, Guser, Gloading, Gerror] = useSignInWithGoogle(auth);
 
-  const [updateProfile, updating, UpdateError] = useUpdateProfile(auth);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     await createUserWithEmailAndPassword(email, password);
@@ -32,6 +30,13 @@ const Register = () => {
       navigate('/login')
       };
     };
+  
+    const handleGoogle = async () =>{ 
+      await signInWithGoogle();
+    if (!Gerror) {
+      navigate('/')
+      };
+    }
 
     if(user || Guser || auser){
       navigate('/')
@@ -115,15 +120,16 @@ const Register = () => {
                       Please Sign in
                     </Link>
                   </p>
-                  <div className="d-flex justify-content-center align-items-center">
+                  
+                </form>
+                <div className="d-flex justify-content-center align-items-center">
                     <button
                       className="btn bg-light text-dark border"
-                      onClick={async () => await signInWithGoogle()}
+                      onClick={handleGoogle}
                     >
                       Google <i class="fab text-warning fa-google"></i>
                     </button>
                   </div>
-                </form>
                 {error && (
                   <CustomizedSnackbars type={"error"} massage={error.message} />
                 )}

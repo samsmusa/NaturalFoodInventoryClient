@@ -18,7 +18,6 @@ const Login = () => {
   let from = location.state?.from?.pathname || "/";
   const navigate = useNavigate();
 
-
   // Check user login
   const [CheckUser, CheckLoading, CheckError] = useAuthState(auth);
 
@@ -29,23 +28,23 @@ const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
 
-    const [signInWithGoogle, Guser, Gloading, Gerror] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, Guser, Gloading, Gerror] = useSignInWithGoogle(auth);
   // email varification
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     await signInWithEmailAndPassword(email, password);
-    await fetch("http://localhost:5000/gettoken",{
-    method:'POST',  
-    headers: {
-      'content-type': 'application/json'
-    },
-    body : JSON.stringify({email:email})
-  })
-  .then(res=>res.json())
-  .then(res=>{
-    localStorage.setItem('accessToken', res.accessToken)
-  })
+    await fetch("http://localhost:5000/gettoken", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ email: email }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        localStorage.setItem("accessToken", res.accessToken);
+      });
   };
 
   if (user || CheckUser || Guser) {
@@ -65,7 +64,7 @@ const Login = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0.5 }}
-        transition={{ease:"easeInOut" ,duration: 0.5 }}
+        transition={{ ease: "easeInOut", duration: 0.5 }}
         className="d-lg-flex half"
       >
         <div
@@ -79,7 +78,7 @@ const Login = () => {
             <div className="row align-items-center justify-content-center">
               <div className="col-md-7 h-75">
                 <h3 className="mb-4">Sign In</h3>
-                
+
                 <form action="#" method="post" onSubmit={handleSubmit}>
                   <div className="row">
                     <div className="col-md-12">
@@ -117,7 +116,7 @@ const Login = () => {
                       <label className="control--checkbox mb-0">
                         <input type="checkbox" />
                         <span className="caption mx-2">Keep me Locked in</span>
-                        
+
                         <div className="control__indicator"></div>
                       </label>
                     </div>
@@ -137,18 +136,21 @@ const Login = () => {
                       Create New One
                     </Link>
                   </p>
-                  <div className="d-flex justify-content-center align-items-center">
-                <button className="btn BTN-SM bg-light text-dark border" onClick={()=>signInWithGoogle()}>Google <i class="fab text-warning fa-google"></i></button>
-              </div>
+                  
                 </form>
+                <div className="d-flex justify-content-center align-items-center">
+                    <button
+                      className="btn BTN-SM bg-light text-dark border"
+                      onClick={() => signInWithGoogle()}
+                    >
+                      Google <i class="fab text-warning fa-google"></i>
+                    </button>
+                  </div>
               </div>
               {error && (
                 <CustomizedSnackbars type={"error"} massage={error.message} />
               )}
-
-              
             </div>
-            
           </div>
         </div>
       </motion.div>

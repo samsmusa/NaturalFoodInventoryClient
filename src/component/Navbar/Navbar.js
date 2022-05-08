@@ -38,17 +38,17 @@ const Navbar = () => {
             
 
             {!user ? (
-          <li className="nav-item">
-          <Link  className={location.pathname.startsWith("/login") ? "nav-item active-link" : "nav-item"} to='/login'>
+          <li className={location.pathname.startsWith("/login") ? "nav-item active-link" : "nav-item"}>
+          <Link  className="nav-link active" aria-current="page" to='/login'>
             Login
           </Link>
         </li>
         ) : (<>
-          <li className="nav-item">
-              <Link  className={location.pathname.startsWith("/profile") ? "nav-item active-link" : "nav-item"} to='/profile'>
-                Profile
-              </Link>
-            </li>
+          <li className={location.pathname.startsWith("/Profile") ? "nav-item active-link" : "nav-item"}>
+          <Link  className="nav-link active" aria-current="page" to='/profile'>
+            Profile
+          </Link>
+        </li>
             <li className="nav-item">
           <input type="submit" className="btn btn-sm text-white table-heading" value="Sign Out" style={{ border: "none" }} onClick={()=>signOut(auth)} />
           </li>

@@ -3,64 +3,21 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
-import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
 // import "./Profile.css"
-const data = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
-const Profile = () => {
-  const [isEdit, setisEdit] = useState(false);
 
+const Profile = () => {
+
+  const [isEdit, setisEdit] = useState(false);
+  
   const [user, loading, error] = useAuthState(auth);
   const [profile, setProfile] = useState({});
-  useEffect(() => {
+  useEffect(()=>{
     fetch(`http://localhost:5000/user/${user.email}`)
-      .then((res) => res.json())
-      .then((res) => setProfile(res));
+    .then(res=>res.json())
+    .then(res=>setProfile(res)) 
 
-    console.log(user);
-  }, [user]);
+    console.log(user)
+  },[user])
   const {
     register,
     handleSubmit,
@@ -74,22 +31,21 @@ const Profile = () => {
       fetch("http://localhost:5000/user", {
         method: "PUT",
         headers: {
-          "content-type": "application/json",
+          'content-type': 'application/json'
         },
-        body: JSON.stringify(data),
+        body : JSON.stringify(data)
       })
-        .then((res) => res.json())
-        .then((result) => {
-          setProfile(result[0]);
-          let { _id, ...res } = result[0];
-          reset(res);
-        });
+      .then(res=>res.json())
+      .then(result=>{setProfile(result[0]); 
+        let {_id, ...res} = result[0]
+        reset(res)})
       setisEdit(false);
     } else {
       setisEdit(true);
     }
   };
 
+  
   return (
     <AnimatePresence>
       <motion.div
@@ -122,7 +78,9 @@ const Profile = () => {
                             {...register("job")}
                           />
                         ) : (
-                          <p className="text-secondary mb-1">{profile.job}</p>
+                          <p className="text-secondary mb-1">
+                            {profile.job} 
+                          </p>
                         )}
 
                         <p className="text-muted font-size-sm">
@@ -138,7 +96,7 @@ const Profile = () => {
                     <ul className="list-group list-group-flush">
                       <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <h6 className="mb-0">
-                          <i class="fas fa-globe mx-2"></i>
+                        <i class="fas fa-globe mx-2"></i>
                           Website
                         </h6>
                         {isEdit ? (
@@ -157,7 +115,7 @@ const Profile = () => {
                       </li>
                       <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <h6 className="mb-0">
-                          <i class="fab mx-2 fa-github"></i>
+                        <i class="fab mx-2 fa-github"></i>
                           Github
                         </h6>
                         {isEdit ? (
@@ -176,7 +134,7 @@ const Profile = () => {
                       </li>
                       <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <h6 className="mb-0">
-                          <i class="fab mx-2 fa-twitter-square"></i>
+                        <i class="fab mx-2 fa-twitter-square"></i>
                           Twitter
                         </h6>
                         {isEdit ? (
@@ -195,7 +153,7 @@ const Profile = () => {
                       </li>
                       <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <h6 className="mb-0">
-                          <i class="fab mx-2 fa-instagram-square"></i>
+                        <i class="fab mx-2 fa-instagram-square"></i>
                           Instagram
                         </h6>
                         {isEdit ? (
@@ -214,7 +172,7 @@ const Profile = () => {
                       </li>
                       <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <h6 className="mb-0">
-                          <i class="fab mx-2 fa-facebook"></i>
+                        <i class="fab mx-2 fa-facebook"></i>
                           Facebook
                         </h6>
                         {isEdit ? (
@@ -238,25 +196,25 @@ const Profile = () => {
               <div className="col-lg-8">
                 <div className="card">
                   <div className="card-body">
-                    <div className="col-sm-3">
-                      <h6 className="mb-0">Full Name</h6>
+                    <div className="row mb-3">
+                      <div className="col-sm-3">
+                        <h6 className="mb-0">Full Name</h6>
+                      </div>
+                      <div className="col-sm-9 text-secondary">
+                        {isEdit ? (
+                          <input
+                            type="text"
+                            className="form-control w-50 h-75"
+                            defaultValue={profile.name}
+                            placeholder="John Doe"
+                            disabled={!isEdit}
+                            {...register("name")}
+                          />
+                        ) : (
+                          <span className="text-secondary">{profile.name}</span>
+                        )}
+                      </div>
                     </div>
-                    <div className="col-sm-9 text-secondary">
-                      {isEdit ? (
-                        <input
-                          type="text"
-                          className="form-control w-50 h-75"
-                          defaultValue={profile.name}
-                          placeholder="John Doe"
-                          disabled={!isEdit}
-                          {...register("name")}
-                        />
-                      ) : (
-                        <span className="text-secondary">{profile.name}</span>
-                      )}
-                    </div>
-                  </div>
-                  <div className="row mb-3">
                     <div className="row mb-3">
                       <div className="col-sm-3">
                         <h6 className="mb-0">Email</h6>
@@ -327,30 +285,8 @@ const Profile = () => {
                         <h5 className="d-flex align-items-center mb-3">
                           Project Status
                         </h5>
-                        <div className="col-4">
-                              <LineChart width={350} height={250} data={data}>
-                                <Line
-                                  type="monotone"
-                                  dataKey="uv"
-                                  stroke="#8884d8"
-                                />
-                                <CartesianGrid stroke="#ccc" />
-                                {/* <XAxis dataKey="name" /> */}
-                                {/* <YAxis /> */}
-                              </LineChart>
-                        </div>
-
-                        <div className="col-4">
-                          <div class="card">
-                            <div class="card-body"></div>
-                          </div>
-                        </div>
-
-                        <div className="col-4">
-                          <div class="card">
-                            <div class="card-body"></div>
-                          </div>
-                        </div>
+                        <p>Web Design</p>
+                        
                       </div>
                     </div>
                   </div>
