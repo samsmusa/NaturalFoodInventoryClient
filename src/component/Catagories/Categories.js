@@ -73,21 +73,15 @@ const Categories = ({ setalldata, alldata, url }) => {
 
   const [catValue, setcatValue] = useState([]);
   function handleinput(event) {
-    console.log(event.target.value, event.target.checked);
     if (event.target.checked) {
       setcatValue([event.target.value, ...catValue]);
-      console.log(catValue);
     } else {
       setcatValue(catValue.filter((item) => item !== event.target.value));
-      console.log(catValue);
     }
-    console.log(catValue);
   }
 
   const handleChange1 = (event, newValue) => {
     setValue(newValue);
-    console.log(value[0]);
-  };
 
   
 
@@ -112,8 +106,6 @@ const Categories = ({ setalldata, alldata, url }) => {
 
 
   useEffect(() => {
-    console.log(data)
-    // console.log(catValue.includes('Eggs'))
     setalldata(
       data.filter(
         (e) => parseInt(e.price) >= value[0] && parseInt(e.price) <= value[1]

@@ -159,9 +159,7 @@ const Inventory = () => {
 
     const RefreshItem = ()=>{
         setalldata([])
-        console.log('00000')
         let [datas] = LoadHomeData()
-        console.log(datas)
     }
   
     
@@ -170,7 +168,6 @@ const Inventory = () => {
       data.email = user.email;
       if(isAdd){
       data.addDate = utc
-      console.log(data, isAdd);
       await fetch("http://localhost:5000/products", {
         method: "POST",
         headers: {
@@ -189,10 +186,8 @@ const Inventory = () => {
         description: "",
       })
     }else {
-      console.log(data, isAdd);
       data.editDate = utc
       let {_id, ...res}= data
-      console.log(res, isAdd);
       await fetch(`http://localhost:5000/products/${formData._id}`, {
         method: "PUT",
         headers: {
@@ -202,7 +197,6 @@ const Inventory = () => {
       })
       .then(res=>res.json())
       .then(result=>{
-        console.log(result)
         let objIndex = alldata.findIndex((obj => obj._id === result._id));
         alldata[objIndex] = result
         

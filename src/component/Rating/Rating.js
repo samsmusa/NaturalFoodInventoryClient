@@ -4,7 +4,6 @@ import ReactStars from "react-rating-stars-component";
 const Rating = ({value}) => {
 
     const ratingChanged = (newRating) => {
-        console.log(newRating);
       };
     return (
         <ReactStars

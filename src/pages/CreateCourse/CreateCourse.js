@@ -5,7 +5,6 @@ import bg from "../../assets/Images/form-img.jpg"
 
 const CreateCourse = () => {
     const [content, setContent] = useState('')
-    console.log(content)
     
   return (
     <div className="container">

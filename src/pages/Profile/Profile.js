@@ -6,18 +6,15 @@ import auth from "../../firebase.init";
 // import "./Profile.css"
 
 const Profile = () => {
-
   const [isEdit, setisEdit] = useState(false);
-  
+
   const [user, loading, error] = useAuthState(auth);
   const [profile, setProfile] = useState({});
-  useEffect(()=>{
+  useEffect(() => {
     fetch(`http://localhost:5000/user/${user.email}`)
-    .then(res=>res.json())
-    .then(res=>setProfile(res)) 
-
-    console.log(user)
-  },[user])
+      .then((res) => res.json())
+      .then((res) => setProfile(res));
+  }, [user]);
   const {
     register,
     handleSubmit,
@@ -26,26 +23,26 @@ const Profile = () => {
   } = useForm();
   const onSubmit = (data) => {
     data.email = user.email;
-    console.log(data);
     if (isEdit) {
       fetch("http://localhost:5000/user", {
         method: "PUT",
         headers: {
-          'content-type': 'application/json'
+          "content-type": "application/json",
         },
-        body : JSON.stringify(data)
+        body: JSON.stringify(data),
       })
-      .then(res=>res.json())
-      .then(result=>{setProfile(result[0]); 
-        let {_id, ...res} = result[0]
-        reset(res)})
+        .then((res) => res.json())
+        .then((result) => {
+          setProfile(result[0]);
+          let { _id, ...res } = result[0];
+          reset(res);
+        });
       setisEdit(false);
     } else {
       setisEdit(true);
     }
   };
 
-  
   return (
     <AnimatePresence>
       <motion.div
@@ -78,9 +75,7 @@ const Profile = () => {
                             {...register("job")}
                           />
                         ) : (
-                          <p className="text-secondary mb-1">
-                            {profile.job} 
-                          </p>
+                          <p className="text-secondary mb-1">{profile.job}</p>
                         )}
 
                         <p className="text-muted font-size-sm">
@@ -96,7 +91,7 @@ const Profile = () => {
                     <ul className="list-group list-group-flush">
                       <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <h6 className="mb-0">
-                        <i class="fas fa-globe mx-2"></i>
+                          <i class="fas fa-globe mx-2"></i>
                           Website
                         </h6>
                         {isEdit ? (
@@ -115,7 +110,7 @@ const Profile = () => {
                       </li>
                       <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <h6 className="mb-0">
-                        <i class="fab mx-2 fa-github"></i>
+                          <i class="fab mx-2 fa-github"></i>
                           Github
                         </h6>
                         {isEdit ? (
@@ -134,7 +129,7 @@ const Profile = () => {
                       </li>
                       <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <h6 className="mb-0">
-                        <i class="fab mx-2 fa-twitter-square"></i>
+                          <i class="fab mx-2 fa-twitter-square"></i>
                           Twitter
                         </h6>
                         {isEdit ? (
@@ -153,7 +148,7 @@ const Profile = () => {
                       </li>
                       <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <h6 className="mb-0">
-                        <i class="fab mx-2 fa-instagram-square"></i>
+                          <i class="fab mx-2 fa-instagram-square"></i>
                           Instagram
                         </h6>
                         {isEdit ? (
@@ -172,7 +167,7 @@ const Profile = () => {
                       </li>
                       <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <h6 className="mb-0">
-                        <i class="fab mx-2 fa-facebook"></i>
+                          <i class="fab mx-2 fa-facebook"></i>
                           Facebook
                         </h6>
                         {isEdit ? (
@@ -286,7 +281,6 @@ const Profile = () => {
                           Project Status
                         </h5>
                         <p>Web Design</p>
-                        
                       </div>
                     </div>
                   </div>

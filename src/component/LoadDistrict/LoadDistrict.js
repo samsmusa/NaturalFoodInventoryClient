@@ -5,7 +5,7 @@ const LoadDistrict = (districtName,string) => {
     useEffect(()=>{
         fetch(`https://bdapis.herokuapp.com/api/v1.1/division/${string}`)
         .then(res=>res.json())
-        .then(result=>console.log(result.data))
+        .then(result=>setDistrict(result.data))
     },[districtName])
     return [district, setDistrict]
 };

@@ -13,13 +13,6 @@ import auth from "../../firebase.init";
 import { Line, CartesianGrid, XAxis, YAxis, ComposedChart, Tooltip, Legend, Area, Bar } from 'recharts';
 
 import useComponentVisible from "../../component/useComponentVisible/useComponentVisible";
-// import "./style.css"
-
-
-// timestamp= {nanoseconds: 0,
-//   seconds: 1562524200}
-
-//   console.log(new Date(timestamp.seconds*1000))
 
 const MyItem = () => {
   const goToTop = () => {
@@ -34,8 +27,6 @@ const MyItem = () => {
   let location = useLocation();
 
   let locationName = location.pathname;
-  console.log(locationName, locationName==="/myitem/inventory")
-  // let locationName = location.pathname.split('/').slice(-1)[0];
 
   
   return (

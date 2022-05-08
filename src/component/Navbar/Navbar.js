@@ -8,7 +8,6 @@ import { signOut } from "firebase/auth";
 
 const Navbar = () => {
   let location = useLocation()
-  console.log(location.pathname)
   const [user, loading, error] = useAuthState(auth);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light  sticky-top">

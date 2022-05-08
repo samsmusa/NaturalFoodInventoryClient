@@ -15,8 +15,6 @@ export default function CustomizedSnackbars({
   extra,
   link,
   click,
-}) {
-  console.log(type, massage);
   const [open, setOpen] = React.useState(true);
 
   const handleClose = (event, reason) => {

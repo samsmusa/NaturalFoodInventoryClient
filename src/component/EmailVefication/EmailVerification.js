@@ -9,7 +9,6 @@ const EmailVerification = () => {
 
   const [user, loading, error] = useAuthState(auth);
   if(user){
-      console.log(user)
 }
   const sendVarification = async () => {
     await sendEmailVerification();
