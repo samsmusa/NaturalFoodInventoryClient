@@ -4,7 +4,6 @@ import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 
 const Item = () => {
   const { id } = useParams();
-  // console.log(id);
   const [product, setProudct] = useState({});
   const url = `http://localhost:5000/product/${id}`;
   useEffect(() => {
