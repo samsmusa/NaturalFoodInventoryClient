@@ -196,10 +196,10 @@ const CustomerList = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0.5 }}
                     transition={{ ease: "easeIn", duration: 0.2 }}
-                    key={index + "1e3ra21"}
+                    key={index + "1123434"}
                     className="list-group-item col-12 "
                   >
-                    <CustomerCart key={index} user={item} />
+                    <CustomerCart key={index +"5564343"} user={item} />
                   </motion.li>
                 ))
               )}

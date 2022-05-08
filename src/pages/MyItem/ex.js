@@ -82,7 +82,7 @@
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0.5 }}
                       transition={{ ease: "easeIn", duration: 0.2 }}
-                      key={index+'76'}
+                      key={index+'745236'}
                       className="list-group-item col-12 "
                     >
                       <MyItemCard

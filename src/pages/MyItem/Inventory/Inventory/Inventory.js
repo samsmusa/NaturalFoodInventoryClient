@@ -83,7 +83,11 @@ const Inventory = () => {
     const [alldata, setalldata] = useState([]);
     const url = `http://localhost:5000/products/${user.email}`
     useEffect(()=>{
-      fetch(url)
+      fetch(url, {
+        headers: {
+          authorization: localStorage.getItem('accessToken')
+        }
+      })
         .then(res=>res.json())
         .then(result=>setalldata(result))
     },[])

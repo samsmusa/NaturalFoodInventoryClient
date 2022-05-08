@@ -68,7 +68,7 @@ const Categories = ({ setalldata, alldata, url }) => {
     fetch(url)
     .then(res=>res.json())
     .then(res=>setdata(res))
-  },)
+  },[])
 
 
   const [catValue, setcatValue] = useState([]);
@@ -147,7 +147,7 @@ const Categories = ({ setalldata, alldata, url }) => {
               <motion.div layout
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }} key={index + "19"} className="m-0">
+              exit={{ opacity: 0 }} key={index + "1349"} className="m-0">
                 <label className="mx-1 overflow-hidden">
                   <input
                     className="mx-1"

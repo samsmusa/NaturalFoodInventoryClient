@@ -33,22 +33,33 @@ const Login = () => {
 
   // email varification
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    signInWithEmailAndPassword(email, password);
+    await signInWithEmailAndPassword(email, password);
+    await fetch("http://localhost:5000/gettoken",{
+    method:'POST',  
+    headers: {
+      'content-type': 'application/json'
+    },
+    body : JSON.stringify({email:email})
+  })
+  .then(res=>res.json())
+  .then(res=>{
+    localStorage.setItem('accessToken', res.accessToken)
+  })
   };
 
-  if (user || CheckUser) {
-    return navigate(
-      from,
-      {
-        state: {
-          location: "login",
-        },
-      },
-      { replace: true }
-    );
-  }
+  // if (user || CheckUser) {
+  //   return navigate(
+  //     from,
+  //     {
+  //       state: {
+  //         location: "login",
+  //       },
+  //     },
+  //     { replace: true }
+  //   );
+  // }
   return (
     <AnimatePresence>
       <motion.div

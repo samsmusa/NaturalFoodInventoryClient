@@ -8,8 +8,8 @@ const HomeItemCards = ({ item, isGrid }) => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0.5 }}
-      transition={{ ease: "easeIn", duration: 0.2 }}
+      exit={{ opacity: 0 }}
+      transition={{ ease: "easeIn", duration: 0.2, delay:1 }}
       className={isGrid ? "col-4 rounded  " : "col-12 rounded  "}
     >
       <div
@@ -55,12 +55,12 @@ const HomeItemCards = ({ item, isGrid }) => {
                 {item.quantity && item.quantity !== "0" ? (
                   <span style={{ fontSize: "12px" }}>
                     available({item.quantity}){" "}
-                    <i class=" text-success fas fa-check-circle"></i>
+                    <i className=" text-success fas fa-check-circle"></i>
                   </span>
                 ) : (
                   <span style={{ fontSize: "12px" }}>
                     item is not available{" "}
-                    <i class="fas fa-exclamation-circle text-warning"></i>
+                    <i className="fas fa-exclamation-circle text-warning"></i>
                   </span>
                 )}{" "}
               </span>
