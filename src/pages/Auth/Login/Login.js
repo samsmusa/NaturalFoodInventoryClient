@@ -17,11 +17,7 @@ const Login = () => {
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
   const navigate = useNavigate();
-  // state: { prevPath: location.pathname }}}
-  // window.scrollTo({
-  //     top: 0,
-  //     behavior: 'smooth',
-  //   })
+
 
   // Check user login
   const [CheckUser, CheckLoading, CheckError] = useAuthState(auth);
@@ -152,7 +148,7 @@ const Login = () => {
 
               
             </div>
-            {/* <p className=""  >Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates voluptatum nobis, quod quos blanditiis aliquam similique, maxime fuga fugiat pariatur dolorum modi aut officia magni mollitia sunt atque non corrupti.</p> */}
+            
           </div>
         </div>
       </motion.div>

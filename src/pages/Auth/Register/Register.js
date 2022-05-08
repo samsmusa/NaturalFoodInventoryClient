@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import bg from "../../../assets/Images/bg_1.jpg";
 import auth from "../../../firebase.init";
 import "../Form2.css";
@@ -9,14 +9,10 @@ import {
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import CustomizedSnackbars from "../../../component/CustomizedSnackbars/CustomizedSnackbars";
-import Parser from "html-react-parser";
 import { useUpdateProfile } from "react-firebase-hooks/auth";
 import { AnimatePresence, motion } from "framer-motion";
 
 const Register = () => {
-  const location = useLocation();
-  const [displayName, setDisplayName] = useState("");
-  const [photoURL, setPhotoURL] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -103,7 +99,6 @@ const Register = () => {
                           Okay with our Terms and Conditions and our Privacy Policy.
                         </span>
                         
-                        {/* <div className="control__indicator"></div> */}
                       </label>
                     </div>
                   </div>
