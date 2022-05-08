@@ -3,7 +3,9 @@ import {
   useAuthState,
   useSendEmailVerification,
   useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
+
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import bg from "../../../assets/Images/bg_1.jpg";
 import CustomizedSnackbars from "../../../component/CustomizedSnackbars/CustomizedSnackbars";
@@ -31,6 +33,7 @@ const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
 
+    const [signInWithGoogle, Guser, Gloading, Gerror] = useSignInWithGoogle(auth);
   // email varification
 
   const handleSubmit = async (event) => {
@@ -49,17 +52,17 @@ const Login = () => {
   })
   };
 
-  // if (user || CheckUser) {
-  //   return navigate(
-  //     from,
-  //     {
-  //       state: {
-  //         location: "login",
-  //       },
-  //     },
-  //     { replace: true }
-  //   );
-  // }
+  if (user || CheckUser || Guser) {
+    return navigate(
+      from,
+      {
+        state: {
+          location: "login",
+        },
+      },
+      { replace: true }
+    );
+  }
   return (
     <AnimatePresence>
       <motion.div
@@ -79,11 +82,8 @@ const Login = () => {
           <div className="container">
             <div className="row align-items-center justify-content-center">
               <div className="col-md-7 h-75">
-                <h3>Sign In</h3>
-                <p className="mb-4">
-                  Lorem ipsum dolor sit amet elit. Sapiente sit aut eos
-                  consectetur adipisicing.
-                </p>
+                <h3 className="mb-4">Sign In</h3>
+                
                 <form action="#" method="post" onSubmit={handleSubmit}>
                   <div className="row">
                     <div className="col-md-12">
@@ -118,9 +118,10 @@ const Login = () => {
 
                   <div className="d-flex mb-5 mt-4 align-items-center">
                     <div className="d-flex align-items-center">
-                      <label className="control control--checkbox mb-0">
-                        <span className="caption">Keep me Locked in</span>
+                      <label className="control--checkbox mb-0">
                         <input type="checkbox" />
+                        <span className="caption mx-2">Keep me Locked in</span>
+                        
                         <div className="control__indicator"></div>
                       </label>
                     </div>
@@ -140,11 +141,16 @@ const Login = () => {
                       Create New One
                     </Link>
                   </p>
+                  <div className="d-flex justify-content-center align-items-center">
+                <button className="btn BTN-SM bg-light text-dark border" onClick={()=>signInWithGoogle()}>Google <i class="fab text-warning fa-google"></i></button>
+              </div>
                 </form>
               </div>
               {error && (
                 <CustomizedSnackbars type={"error"} massage={error.message} />
               )}
+
+              
             </div>
             {/* <p className=""  >Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates voluptatum nobis, quod quos blanditiis aliquam similique, maxime fuga fugiat pariatur dolorum modi aut officia magni mollitia sunt atque non corrupti.</p> */}
           </div>

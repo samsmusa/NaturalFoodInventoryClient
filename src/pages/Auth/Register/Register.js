@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import bg from "../../../assets/Images/bg_1.jpg";
 import auth from "../../../firebase.init";
 import "../Form2.css";
 import {
   useAuthState,
   useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import CustomizedSnackbars from "../../../component/CustomizedSnackbars/CustomizedSnackbars";
 import Parser from "html-react-parser";
@@ -19,9 +20,12 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate()
+  const [auser] = useAuthState(auth)
   // sign with email and password
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+  const [signInWithGoogle, Guser, Gloading, Gerror] = useSignInWithGoogle(auth);
 
   const [updateProfile, updating, UpdateError] = useUpdateProfile(auth);
 
@@ -29,20 +33,20 @@ const Register = () => {
     event.preventDefault();
     await createUserWithEmailAndPassword(email, password);
     if (!error) {
-      await updateProfile({
-        displayName,
-        photoURL,
-        phoneNumber: "+11234567890",
-      });
+      navigate('/login')
+      };
+    };
+
+    if(user || Guser || auser){
+      navigate('/')
     }
-  };
   return (
     <AnimatePresence>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0.5 }}
-        transition={{ease:"easeIn" ,duration: 0.5 }}
+        transition={{ ease: "easeIn", duration: 0.5 }}
         className="d-lg-flex half"
       >
         <div
@@ -55,37 +59,10 @@ const Register = () => {
           <div className="container">
             <div className="row align-items-center justify-content-center">
               <div className="col-md-7 py-5">
-                <h3>Register</h3>
-                <p className="mb-4">
-                  Lorem ipsum dolor sit amet elit. Sapiente sit aut eos
-                  consectetur adipisicing.
-                </p>
+                <h3 className="mb-4">Register</h3>
+
                 <form action="#" method="post" onSubmit={handleSubmit}>
-                  <div className="row">
-                    <div className="col-md-6">
-                      <div className="form-group first">
-                        <label>First Name</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="e.g. John"
-                          value={displayName}
-                          onChange={(e) => setDisplayName(e.target.value)}
-                        />
-                      </div>
-                    </div>
-                    <div className="col-md-6">
-                      <div className="form-group first">
-                        <label>Last Name</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="e.g. Smith"
-                          id="lname"
-                        />
-                      </div>
-                    </div>
-                  </div>
+                  
                   <div className="row">
                     <div className="col-md-12">
                       <div className="form-group first">
@@ -97,31 +74,6 @@ const Register = () => {
                           placeholder="e.g. john@your-domain.com"
                           value={email}
                           id="email"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-6">
-                      <div className="form-group first">
-                        <label>Phone Number</label>
-                        <input
-                          type="photoURL"
-                          className="form-control"
-                          placeholder="https:kjdfkdjf.com"
-                          value={photoURL}
-                          onChange={(e) => setPhotoURL(e.target.value)}
-                        />
-                      </div>
-                    </div>
-                    <div className="col-md-6">
-                      <div className="form-group first">
-                        <label>Website</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="e.g. https://google.com"
-                          id="lname"
                         />
                       </div>
                     </div>
@@ -140,29 +92,18 @@ const Register = () => {
                         />
                       </div>
                     </div>
-                    <div className="col-md-6">
-                      <div className="form-group last mb-3">
-                        <label>Re-type Password</label>
-                        <input
-                          type="password"
-                          className="form-control"
-                          placeholder="Your Password"
-                          id="re-password"
-                        />
-                      </div>
-                    </div>
+                    
                   </div>
 
                   <div className="d-flex mb-5 mt-4 align-items-center">
                     <div className="d-flex align-items-center">
-                      <label className="control control--checkbox mb-0">
-                        <span className="caption">
-                          Creating an account means you're okay with our{" "}
-                          <a href="#">Terms and Conditions</a> and our{" "}
-                          <a href="#">Privacy Policy</a>.
-                        </span>
+                      <label className="mb-0">
                         <input type="checkbox" />
-                        <div className="control__indicator"></div>
+                        <span className="caption mx-2">
+                          Okay with our Terms and Conditions and our Privacy Policy.
+                        </span>
+                        
+                        {/* <div className="control__indicator"></div> */}
                       </label>
                     </div>
                   </div>
@@ -179,6 +120,14 @@ const Register = () => {
                       Please Sign in
                     </Link>
                   </p>
+                  <div className="d-flex justify-content-center align-items-center">
+                    <button
+                      className="btn bg-light text-dark border"
+                      onClick={async () => await signInWithGoogle()}
+                    >
+                      Google <i class="fab text-warning fa-google"></i>
+                    </button>
+                  </div>
                 </form>
                 {error && (
                   <CustomizedSnackbars type={"error"} massage={error.message} />
@@ -191,8 +140,6 @@ const Register = () => {
                     link={"/login"}
                   />
                 )}
-
-                <div>{Parser("<Link href='/'> Please Login </Link>")}</div>
               </div>
             </div>
           </div>
