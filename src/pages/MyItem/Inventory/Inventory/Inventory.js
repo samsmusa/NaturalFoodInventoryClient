@@ -1,5 +1,5 @@
 import { Box, CircularProgress } from '@mui/material';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Area, Bar, CartesianGrid, ComposedChart, Legend, Line, Tooltip, XAxis } from 'recharts';
@@ -8,8 +8,9 @@ import Categories from '../../../../component/Catagories/Categories';
 import LoadHomeData from '../../../../component/loadData/LoadHomeData';
 import useComponentVisible from '../../../../component/useComponentVisible/useComponentVisible';
 import auth from '../../../../firebase.init';
+import { useForm } from 'react-hook-form';
 
-
+var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
 const catagorie = [
     "Cereals",
     "Roots",
@@ -79,52 +80,73 @@ const Inventory = () => {
     const [selectedOption, setSelectedOption] = useState(catagorie[0]);
     const [id, setid] = useState("we");
     const [formData, setformData] = useState({});
-    const [alldata, setalldata] = LoadHomeData();
-    const [isAdd, setisAdd] = useState(false);
+    const [alldata, setalldata] = useState([]);
+    const url = `http://localhost:5000/products/${user.email}`
+    useEffect(()=>{
+      fetch(url)
+        .then(res=>res.json())
+        .then(result=>setalldata(result))
+    },[])
+    const [isAdd, setisAdd] = useState(true);
+    const {
+      register,
+      handleSubmit,
+      reset,
+      formState: { errors },
+    } = useForm();
   
     const editItem = (id, category) => {
-      // setisAdd(true);
-      console.log(category);
-      setSelectedOption(category);
-      setid(id);
+       setid(id);
+       setSelectedOption(category);
+      
     };
   
-    const removeItem = (id) => {
-      setalldata([...alldata.filter((itm) => itm._id != id)]);
+    const removeItem = async (id) => {
+      await fetch(`http://localhost:5000/products/${id}`,  {
+        method: "POST",
+        headers: {
+          'content-type': 'application/json'
+        },
+        body : JSON.stringify({email:user.email})
+      })
+      .then(res=>res.json())
+      .then(result=>setalldata(result)) 
     };
     useEffect(() => {
-      setformData(alldata.find((itm) => itm._id == String(id)));
+      setformData(alldata.find((itm) => itm._id === id));
     }, [id]);
+
+    useEffect(()=>{
+      reset(formData)
+    },[formData])
   
-    const handleChangeTitle = (event) => {
-      const { name, ...res } = formData;
-      setformData({ name: event.target.value });
-    };
-    // const handleChangeImage = (event)=>{
-    //   const {name, ...res} = formData
-    //   setformData({name:event.target.value})
-    // }
-    const handleChangePrice = (event) => {
-      const { price, ...res } = formData;
-      setformData({ price: event.target.value });
-    };
-    const handleChangeQuantity = (event) => {
-      const { quantity, ...res } = formData;
-      setformData({ quantity: event.target.value });
-    };
+    // const handleChangeTitle = (event) => {
+    //   const { name, ...res } = formData;
+    //   setformData({ name: event.target.value });
+    // };
+    
+    // const handleChangePrice = (event) => {
+    //   const { price, ...res } = formData;
+    //   setformData({ price: event.target.value });
+    // };
+    // const handleChangeQuantity = (event) => {
+    //   const { quantity, ...res } = formData;
+    //   setformData({ quantity: event.target.value });
+    // };
     // const handleChangeTitle = (event)=>{
     //   const {name, ...res} = formData
     //   setformData({name:event.target.value})
     // }
     const addItem = () => {
-      setisAdd(false);
+      setisAdd(true);
       setSelectedOption("Cereals");
       setformData({
-        name: "",
+        title: "",
         image: "",
         price: "",
         quantity: "",
         category: "Cereals",
+        description: "",
       });
       setid("");
     };
@@ -138,38 +160,67 @@ const Inventory = () => {
         console.log(datas)
     }
   
-    const submitHandle = (event) => {
-      console.log(event.target.title.value);
-      event.preventDefault();
-      if (!isAdd) {
-        console.log(102);
-        setalldata([
-          {
-            name: event.target.title.value,
-            catagory: event.target.title.value,
-            price: event.target.price.value,
-            quantity: selectedOption,
-          },
-          ...alldata,
-        ]);
-      } else {
-        console.log(502);
-        const editdata = alldata.find((itm) => itm._id == String(id));
-        editdata.name = event.target.title.value;
-        // editdata.name = event.target.image.value
-        editdata.price = event.target.price.value;
-        editdata.quantity = event.target.quantity.value;
-        editdata.catagory = selectedOption;
-  
-        setalldata([editdata, ...alldata.filter((itm) => itm._id != id)]);
+    
+
+    const onSubmit = async (data) => {
+      data.email = user.email;
+      if(isAdd){
+      data.addDate = utc
+      console.log(data, isAdd);
+      await fetch("http://localhost:5000/products", {
+        method: "POST",
+        headers: {
+          'content-type': 'application/json'
+        },
+        body : JSON.stringify(data)
+      })
+      .then(res=>res.json())
+      .then(result=>setalldata([result, ...alldata]))
+      reset({
+        title: "",
+        image: "",
+        price: "",
+        quantity: "",
+        category: "Cereals",
+        description: "",
+      })
+    }else {
+      console.log(data, isAdd);
+      data.editDate = utc
+      let {_id, ...res}= data
+      console.log(res, isAdd);
+      await fetch(`http://localhost:5000/products/${formData._id}`, {
+        method: "PUT",
+        headers: {
+          'content-type': 'application/json'
+        },
+        body : JSON.stringify(res)
+      })
+      .then(res=>res.json())
+      .then(result=>{
+        console.log(result)
+        let objIndex = alldata.findIndex((obj => obj._id === result._id));
+        alldata[objIndex] = result
+        
+        setalldata([...alldata]) 
       }
+      )
+      reset({
+        title: "",
+        image: "",
+        price: "",
+        quantity: "",
+        category: "Cereals",
+        description: ""})
+
+    }
     };
 
     return (
         <div className='row'>
             <div className="p-0 px-2 col-9">
           
-          <AnimatePresence>
+          <AnimateSharedLayout>
             <div className="panel-heading ">
               <li
                 className=" d-flex justify-content-between align-items-center list-group-item table-heading text-center text-light"
@@ -189,7 +240,7 @@ const Inventory = () => {
                   }}
                 />
                 <span>{alldata.length !== 0 ? `You have ${alldata.length} Products`: "No Product available ! please Add something"}</span>
-                <i className="fas mx-3 fa-sync " onClick={RefreshItem} onMouseEnter={(event)=> event.target.classList.add('fa-spin')} onMouseLeave={(event)=>event.target.classList.remove('fa-spin')}></i>
+                <i className="fas fa-sync mx-3 " onClick={RefreshItem} onMouseEnter={(event)=> event.target.classList.add('fa-spin')} onMouseLeave={(event)=>event.target.classList.remove('fa-spin')}></i>
               </li>
               <li
                 className="list-group-item text-center text-dark"
@@ -250,7 +301,7 @@ const Inventory = () => {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0.5 }}
                       transition={{ ease: "easeIn", duration: 0.2 }}
-                      key={index+'345'}
+                      key={item._id}
                       className="list-group-item col-12 "
                     >
                       <MyItemCard
@@ -266,17 +317,17 @@ const Inventory = () => {
                 )}
               </ul>
             </div>
-          </AnimatePresence>
+          </AnimateSharedLayout>
         </div>
         <div className="bg-light rounded border  col-3 p-0 m-0">
           
           <div className="p-2 contents  h-100">
-            <Categories alldata={alldata} setalldata={setalldata} />
+            <Categories alldata={alldata} setalldata={setalldata} url={url}/>
             
             <div className="border rounded border-primary">
               <p className="text-center text-light table-heading">Sales Graph</p>
-            <ComposedChart width={300} height={250} data={data}>
-              <XAxis dataKey="name" />
+            <ComposedChart width={250} height={250} data={data}>
+              {/* <XAxis dataKey="name" /> */}
               {/* <YAxis /> */}
               <Tooltip />
               <Legend />
@@ -287,7 +338,7 @@ const Inventory = () => {
                 fill="#8884d8"
                 stroke="#8884d8"
               />
-              <Bar dataKey="pv" barSize={20} fill="#413ea0" />
+              <Bar dataKey="pv" barSize={15} fill="#413ea0" />
               <Line type="monotone" dataKey="uv" stroke="#ff7300" />
             </ComposedChart>
           </div>
@@ -305,7 +356,7 @@ const Inventory = () => {
           <div className="modal-content" style={{ backgroundColor: "#e5e6eb" }}>
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                {!isAdd ? "Add New Item" : "Edit Item"}
+                {isAdd ? "Add New Item" : "Edit Item"}
               </h5>
               <button
                 type="button"
@@ -314,19 +365,19 @@ const Inventory = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <form onSubmit={submitHandle} className="px-3">
+            <form onSubmit={handleSubmit(onSubmit)} className="px-3">
               <div className="modal-body">
                 <div className="row">
                   <div className="col-md-12">
                     <div className="form-group first">
-                      <label>Product Title</label>
+                      <label>Product Title </label>
                       <input
-                        type="text"
+                        type="text" 
                         className="form-control"
                         placeholder="ef mango"
-                        value={formData?.name}
+                        defaultValue={formData?.title}
                         name="title"
-                        onChange={handleChangeTitle}
+                        {...register("title")}
                       />
                     </div>
                   </div>
@@ -339,9 +390,24 @@ const Inventory = () => {
                         type="text"
                         className="form-control"
                         placeholder="eg htt"
-                        value={formData?.image}
+                        defaultValue={formData?.image}
                         name="image"
-                        onChange={handleChangeTitle}
+                        {...register("image")}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="form-group first">
+                      <label>Product Description</label>
+                      <textarea
+                        type="text"
+                        className="form-control"
+                        placeholder="This Product...."
+                        defaultValue={formData?.description}
+                        name="description"
+                        {...register("description")}
                       />
                     </div>
                   </div>
@@ -351,12 +417,13 @@ const Inventory = () => {
                     <div className="form-group first">
                       <label>Product Category</label>
                       <select
-                        value={selectedOption}
+                        defaultValue={selectedOption}
                         className="form-control"
+                        {...register("category")}
                         onChange={(e) => setSelectedOption(e.target.value)}
                       >
                         {catagorie.map((itm, index) => (
-                          <option key={index+'009'} value={itm}>
+                          <option key={index+'009'} defaultValue={itm}>
                             {itm}
                           </option>
                         ))}
@@ -372,9 +439,9 @@ const Inventory = () => {
                         type="text"
                         className="form-control"
                         placeholder="eg $100"
-                        value={formData?.price}
+                        defaultValue={formData?.price}
                         name="price"
-                        onChange={handleChangePrice}
+                        {...register("price")}
                       />
                     </div>
                   </div>
@@ -385,9 +452,9 @@ const Inventory = () => {
                         type="text"
                         className="form-control"
                         placeholder="eg 10"
-                        value={formData?.quantity}
+                        defaultValue={formData?.quantity}
                         name="quantity"
-                        onChange={handleChangeQuantity}
+                        {...register("quantity")}
                       />
                     </div>
                   </div>
@@ -398,13 +465,13 @@ const Inventory = () => {
                 <input
                   type="button"
                   data-bs-dismiss="modal"
-                  value={"Close"}
+                  defaultValue={"Close"}
                   className="active-category text-center mt-3 table-heading-close"
                   style={{ border: "none" }}
                 />
                 <input
                   type="submit"
-                  value={!isAdd ? "Add" : "Edit"}
+                  defaultValue={isAdd ? "Add" : "Edit"}
                   data-bs-dismiss="modal"
                   className="active-category text-center mt-3 table-heading"
                   style={{ border: "none" }}
@@ -414,6 +481,7 @@ const Inventory = () => {
           </div>
         </div>
       </div>
+      
         </div>
     );
 };

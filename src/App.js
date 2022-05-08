@@ -21,6 +21,7 @@ import Stock from "./pages/MyItem/Inventory/Stock/Stock";
 import Categories from "./pages/MyItem/Inventory/Categories/Categories";
 import Attributes from "./pages/MyItem/Inventory/Attributes/Attributes";
 import LocationAndZone from "./pages/MyItem/Inventory/LocationAndZone/LocationAndZone";
+import Item from "./pages/Item/Item";
 
 function App() {
   return (
@@ -59,6 +60,14 @@ function App() {
           element={
             <RequireAuth>
               <Profile />
+            </RequireAuth>
+          }
+        ></Route>
+        <Route
+          path="/item/:id"
+          element={
+            <RequireAuth>
+              <Item/>
             </RequireAuth>
           }
         ></Route>

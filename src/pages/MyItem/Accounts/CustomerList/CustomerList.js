@@ -209,11 +209,11 @@ const CustomerList = () => {
       </div>
 
       <div className="col-3 p-0 m-0  ">
-        <div class="card p-0 m-0 mt-3 border border-primary">
-          <div class="card-header table-heading  right-side-card">
+        <div className="card p-0 m-0 mt-3 border border-primary">
+          <div className="card-header table-heading  right-side-card">
             Filter with Type
           </div>
-          <div class="card-body">
+          <div className="card-body">
             <motion.div
               className={
                 userType == "all"
@@ -340,14 +340,14 @@ const CustomerList = () => {
             </motion.div>
           </div>
         </div>
-        <div class="card p-0 m-0 mt-3">
+        <div className="card p-0 m-0 mt-3">
           <div
-            class="card-header right-side-card"
+            className="card-header right-side-card"
             style={{ backgroundColor: "#a9a9a9" }}
           >
             Filter with location
           </div>
-          <div class="card-body mt-3">
+          <div className="card-body mt-3">
             <motion.div
               className="mx-auto mt-0 text-dark d-flex align-items-center justify-content-between select-side-tab-blue table-heading "
               initial="rest"

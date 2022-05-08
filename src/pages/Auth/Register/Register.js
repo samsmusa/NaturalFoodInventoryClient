@@ -161,7 +161,7 @@ const Register = () => {
                           <a href="#">Terms and Conditions</a> and our{" "}
                           <a href="#">Privacy Policy</a>.
                         </span>
-                        <input type="checkbox" checked="checked" />
+                        <input type="checkbox" />
                         <div className="control__indicator"></div>
                       </label>
                     </div>

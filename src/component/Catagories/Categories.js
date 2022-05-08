@@ -6,8 +6,42 @@ import { Button } from "react-bootstrap";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import LoadHomeData from "../loadData/LoadHomeData";
+import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
+import LoadDivisions from "../LoadDivisions/LoadDivisions";
 
-const Categories = ({setalldata, alldata}) => {
+const leftslashMotion = {
+  rest: { opacity: 1, ease: "easeOut", duration: 0.2, type: "tween" },
+  hover: {
+    opacity: 1,
+    rotate: 180,
+    // x:-10,
+    transition: {
+      duration: 0.4,
+      type: "tween",
+      ease: "easeIn",
+    },
+  },
+};
+const rightslashMotion = {
+  rest: {
+    opacity: 1,
+    rotate: 180,
+    ease: "easeOut",
+    duration: 0.2,
+    type: "tween",
+  },
+  hover: {
+    opacity: 1,
+    // x:10,
+    rotate: 0,
+    transition: {
+      duration: 0.4,
+      type: "tween",
+      ease: "easeIn",
+    },
+  },
+};
+const Categories = ({ setalldata, alldata, url }) => {
   const catagorie = [
     "Cereals",
     "Roots",
@@ -27,15 +61,22 @@ const Categories = ({setalldata, alldata}) => {
   const [toggle, setToggle] = useState(true);
   const [value, setValue] = React.useState([0, 1000]);
   const [catdata, setcatdata] = useState([]);
-  const [data, setdata] = LoadHomeData();
+
+
+  const [data, setdata] = useState([]);
+  useEffect(()=>{
+    fetch(url)
+    .then(res=>res.json())
+    .then(res=>setdata(res))
+  },)
+
+
   const [catValue, setcatValue] = useState([]);
   function handleinput(event) {
     console.log(event.target.value, event.target.checked);
     if (event.target.checked) {
-      
-        setcatValue([event.target.value, ...catValue]);
-        console.log(catValue);
-      
+      setcatValue([event.target.value, ...catValue]);
+      console.log(catValue);
     } else {
       setcatValue(catValue.filter((item) => item !== event.target.value));
       console.log(catValue);
@@ -48,17 +89,7 @@ const Categories = ({setalldata, alldata}) => {
     console.log(value[0]);
   };
 
-  useEffect(()=>{
-    // console.log(value, catValue)
-    // console.log(catValue.includes('Eggs'))
-    setalldata(data.filter(e=>(parseInt(e.price) >= value[0]) && (parseInt(e.price) <= value[1]) ))
-    if(catValue.length !== 0){
-    setalldata(data.filter(e=> (parseInt(e.price) >= value[0]) && (parseInt(e.price) <= value[1]) && catValue.includes(e.catagory)))
-    }
-  },[value,catValue])
-
-
-
+  
 
   const seeAll = () => {
     if (toggle) {
@@ -73,70 +104,110 @@ const Categories = ({setalldata, alldata}) => {
     return `${value}`;
   }
 
+
+
+  
+
+
+
+
+  useEffect(() => {
+    console.log(data)
+    // console.log(catValue.includes('Eggs'))
+    setalldata(
+      data.filter(
+        (e) => parseInt(e.price) >= value[0] && parseInt(e.price) <= value[1]
+      )
+    );
+    if (catValue.length !== 0) {
+      setalldata(
+        data.filter(
+          (e) =>
+            parseInt(e.price) >= value[0] &&
+            parseInt(e.price) <= value[1] &&
+            catValue.includes(e.category)
+        )
+      );
+    }
+  }, [value, catValue]);
+
   return (
-    <div className="CategoryDevider ">
-      <div className="Categories-main">
-        <h3 className="Categories-heading"> Categories </h3>
+    <div className="container">
+      <AnimateSharedLayout>
+        <div className="Categories-main mt-2">
+          <h3 className="Categories-heading"> Categories </h3>
 
-        <div className="ListOfCourses">
-          {catName.map((e, index) => (
-            <div key={index+"19"} className="m-0">
-              <label className="mx-1">
-                <input
-                  className="mx-1"
-                  type="checkbox"
-                  value={e}
-                  onClick={handleinput}
-                />
-                {e}
-              </label>
-            </div>
-          ))}
-        </div>
-        <input
-          type="submit"
-          className="active-category text-center cb table-heading"
-          style={{ border: "none" }}
-          onClick={seeAll}
-          value={toggle ? "SEE-ALL" : "Collapse"}
-        />
-          
-
-        <p className="my-3 fw-bold text-center text-warning">Prifdf df df df df  dfd fdf df dfd d fdf dce Range</p>
-        <Box>
-          <Slider
-            getAriaLabel={() => "Price range"}
-            value={value}
-            onChange={handleChange1}
-            valueLabelDisplay="on"
-            getAriaValueText={valuetext}
-            min={0}
-            max={1000}
-            // color="#000000"
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="ListOfCourses"
+          ><AnimatePresence>
+            {catName.map((e, index) => (
+              <motion.div layout
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }} key={index + "19"} className="m-0">
+                <label className="mx-1 overflow-hidden">
+                  <input
+                    className="mx-1"
+                    type="checkbox"
+                    value={e}
+                    onClick={handleinput}
+                  />
+                  {e}
+                </label>
+              </motion.div>
+            ))}
+            </AnimatePresence>
+          </motion.div>
+          <input
+            type="submit"
+            className="text-center border-0  mb-2 bg-transparent"
+            style={{
+              border: "none",
+              textDecoration: "underline",
+              fontSize: "12px",
+            }}
+            onClick={seeAll}
+            value={toggle ? "see-all" : "Collapse"}
           />
-        </Box>
-      </div>
 
-      <div
-        className="Course-Devider"
-        style={{ height: toggle ? "50%" : "92%" }}
-      ></div>
+          <div className="border-top">
+            <p className="my-1 fw-bold text-left text-dark">price</p>
+            <Box>
+              <Slider
+                size="small"
+                getAriaLabel={() => "Price range"}
+                value={value}
+                onChange={handleChange1}
+                valueLabelDisplay="on"
+                getAriaValueText={valuetext}
+                min={0}
+                max={1000}
+                // color="#000000"
+              />
+            </Box>
+          </div>
+        </div>
 
-      <div className="CategoriesSlider">
-        {catName.map((e, index) => (
-          <p key={index+'jk'} className="Sactive-categoryy">
-            {e}
+        <div className="CategoriesSlider">
+          {catName.map((e, index) => (
+            <p key={index + "jk"} className="Sactive-categoryy">
+              {e}
+            </p>
+          ))}
+          <p
+            // variant="primary"
+            className="Sactive-category text-center cb"
+            style={{ backgroundColor: "#FF4500", border: "none" }}
+            onClick={seeAll}
+          >
+            {toggle ? "SEE-ALL" : "Collapse"}
           </p>
-        ))}
-        <p
-          // variant="primary"
-          className="Sactive-category text-center cb"
-          style={{ backgroundColor: "#FF4500", border: "none" }}
-          onClick={seeAll}
-        >
-          {toggle ? "SEE-ALL" : "Collapse"}
-        </p>
-      </div>
+        </div>
+        
+      </AnimateSharedLayout>
     </div>
   );
 };

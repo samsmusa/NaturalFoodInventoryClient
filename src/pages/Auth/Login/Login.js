@@ -97,7 +97,7 @@ const Login = () => {
                           type="password"
                           className="form-control"
                           placeholder="********"
-                          id="email"
+                          id="password"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                         />
@@ -109,7 +109,7 @@ const Login = () => {
                     <div className="d-flex align-items-center">
                       <label className="control control--checkbox mb-0">
                         <span className="caption">Keep me Locked in</span>
-                        <input type="checkbox" checked="checked" />
+                        <input type="checkbox" />
                         <div className="control__indicator"></div>
                       </label>
                     </div>

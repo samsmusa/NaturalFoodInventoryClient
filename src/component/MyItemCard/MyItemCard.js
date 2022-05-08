@@ -23,13 +23,13 @@ const MyCourseCard = ({ item, id, isAdd, setisAdd, editItem, removeItem }) => {
 
   const hadleEdit = (id, category) => {
     editItem(id, category);
-    setisAdd(true);
+    setisAdd(false);
   };
   return (
     <div className="CartContent">
       <div
         className={
-          id == item._id
+          id === item._id
             ? "row p-2 justify-content-between align-items-center bgc-item "
             : "row p-2 justify-content-between align-items-center bg-light"
         }
@@ -38,21 +38,21 @@ const MyCourseCard = ({ item, id, isAdd, setisAdd, editItem, removeItem }) => {
           <Link className="productLink" to="/">
             <div className="CardImageParent">
               <img
-                src={image}
+                src={item.image}
                 className="img-fluid"
                 style={{ width: "100px", height: "80px" }}
-                alt="course"
+                alt="image"
               />
             </div>
           </Link>
 
           <div className="product">
-            <p className="CourseTitle m-0">{item.name}</p>
+            <p className="CourseTitle m-0  mt-2">{item.title}</p>
             <p className="m-0 p-0" style={{ fontSize: "10px" }}>
-              {item.catagory}
+              {item.category}
             </p>
             <p className="m-0 p-0" style={{ fontSize: "10px" }}>
-              {item.catagory}
+              {item.category}
             </p>
           </div>
         </div>
@@ -71,16 +71,16 @@ const MyCourseCard = ({ item, id, isAdd, setisAdd, editItem, removeItem }) => {
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
             style={
-              !(id == item._id)
+              !(id === item._id)
                 ? { color: "orange", cursor: "pointer" }
                 : { color: "#FF4500", cursor: "pointer" }
             }
-            onClick={() => hadleEdit(item._id, item.catagory)}
+            onClick={() => hadleEdit(item._id, item.category)}
           ></motion.i>
           <motion.i
             variants={buttonva}
             whileHover="hover"
-            class="m-2 fas fa-trash"
+            className="m-2 fas fa-trash"
             style={{ color: "#FF4500", cursor: "pointer" }}
             onClick={() => {
               removeItem(item._id);

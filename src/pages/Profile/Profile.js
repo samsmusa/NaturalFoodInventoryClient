@@ -1,28 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useForm } from "react-hook-form";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 // import "./Profile.css"
 
 const Profile = () => {
-  const [isEdit, setisEdit] = useState(false);
-  const [profile, setProfile] = useState({
-    name: "John Doe",
-    job: "Full Stack Developer",
-    location: "Bay Area, San Francisco, CA",
-    website: "https://bootdey.com",
-    github: "github.com",
-    twitter: "twitter.com",
-    instagram: "instagram.com",
-    facebook: "facebook.com",
-  });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const [isEdit, setisEdit] = useState(false);
+  
+  const [user, loading, error] = useAuthState(auth);
+  const [profile, setProfile] = useState({});
+  useEffect(()=>{
+    fetch(`http://localhost:5000/user/${user.email}`)
+    .then(res=>res.json())
+    .then(res=>setProfile(res)) 
+
+    console.log(user)
+  },[user])
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    data.email = user.email;
+    console.log(data);
     if (isEdit) {
+      fetch("http://localhost:5000/user", {
+        method: "PUT",
+        headers: {
+          'content-type': 'application/json'
+        },
+        body : JSON.stringify(data)
+      })
+      .then(res=>res.json())
+      .then(result=>setProfile(result[0]))
       setisEdit(false);
     } else {
       setisEdit(true);
     }
   };
+
+  
   return (
     <AnimatePresence>
       <motion.div
@@ -32,7 +53,7 @@ const Profile = () => {
         transition={{ ease: "easeIn", duration: 0.5 }}
         className="container mt-5"
       >
-        <form action="" onSubmit={handleSubmit}>
+        <form action="" onSubmit={handleSubmit(onSubmit)}>
           <div className="main-body">
             <div className="row">
               <div className="col-lg-4">
@@ -51,11 +72,12 @@ const Profile = () => {
                           <input
                             type="text"
                             className="form-control text-center h-25"
-                            value={profile.job}
+                            defaultValue={profile.job}
+                            {...register("job")}
                           />
                         ) : (
                           <p className="text-secondary mb-1">
-                            Full Stack Developer
+                            {profile.job} 
                           </p>
                         )}
 
@@ -93,8 +115,10 @@ const Profile = () => {
                         {isEdit ? (
                           <input
                             className="form-control overflow-hidden h-25 w-50"
-                            value={profile.website}
+                            defaultValue={profile.website}
+                            placeholder="example.com"
                             type="text"
+                            {...register("website")}
                           />
                         ) : (
                           <span className="text-secondary">
@@ -123,8 +147,10 @@ const Profile = () => {
                         {isEdit ? (
                           <input
                             className="form-control overflow-hidden h-25 w-50"
-                            value={profile.github}
+                            placeholder="github.com"
+                            defaultValue={profile.github}
                             type="text"
+                            {...register("github")}
                           />
                         ) : (
                           <span className="text-secondary">
@@ -153,8 +179,10 @@ const Profile = () => {
                         {isEdit ? (
                           <input
                             className="form-control overflow-hidden h-25 w-50"
-                            value={profile.twitter}
+                            defaultValue={profile.twitter}
                             type="text"
+                            placeholder="twitter.com"
+                            {...register("twitter")}
                           />
                         ) : (
                           <span className="text-secondary">
@@ -192,8 +220,10 @@ const Profile = () => {
                         {isEdit ? (
                           <input
                             className="form-control overflow-hidden h-25 w-50"
-                            value={profile.instagram}
+                            defaultValue={profile.instagram}
+                            placeholder="instagram.com"
                             type="text"
+                            {...register("instagram")}
                           />
                         ) : (
                           <span className="text-secondary">
@@ -222,8 +252,10 @@ const Profile = () => {
                         {isEdit ? (
                           <input
                             className="form-control overflow-hidden h-25 w-50"
-                            value={profile.facebook}
+                            defaultValue={profile.facebook}
+                            placeholder="facebook.com"
                             type="text"
+                            {...register("facebook")}
                           />
                         ) : (
                           <span className="text-secondary">
@@ -243,12 +275,18 @@ const Profile = () => {
                         <h6 className="mb-0">Full Name</h6>
                       </div>
                       <div className="col-sm-9 text-secondary">
-                        <input
-                          type="text"
-                          className="form-control"
-                          value="John Doe"
-                          disabled={!isEdit}
-                        />
+                        {isEdit ? (
+                          <input
+                            type="text"
+                            className="form-control w-50 h-75"
+                            defaultValue={profile.name}
+                            placeholder="John Doe"
+                            disabled={!isEdit}
+                            {...register("name")}
+                          />
+                        ) : (
+                          <span className="text-secondary">{profile.name}</span>
+                        )}
                       </div>
                     </div>
                     <div className="row mb-3">
@@ -256,12 +294,7 @@ const Profile = () => {
                         <h6 className="mb-0">Email</h6>
                       </div>
                       <div className="col-sm-9 text-secondary">
-                        <input
-                          type="text"
-                          className="form-control"
-                          value="john@example.com"
-                          disabled={!isEdit}
-                        />
+                        <span className="text-secondary">{user.email}</span>
                       </div>
                     </div>
                     <div className="row mb-3">
@@ -269,38 +302,42 @@ const Profile = () => {
                         <h6 className="mb-0">Phone</h6>
                       </div>
                       <div className="col-sm-9 text-secondary">
-                        <input
-                          type="text"
-                          className="form-control"
-                          value="(239) 816-9029"
-                          disabled={!isEdit}
-                        />
+                        {isEdit ? (
+                          <input
+                            type="text"
+                            className="form-control w-50 h-75"
+                            placeholder="(239) 816-9029"
+                            defaultValue={profile.phone}
+                            disabled={!isEdit}
+                            {...register("phone")}
+                          />
+                        ) : (
+                          <span className="text-secondary">
+                            {profile.phone}
+                          </span>
+                        )}
                       </div>
                     </div>
-                    <div className="row mb-3">
-                      <div className="col-sm-3">
-                        <h6 className="mb-0">Mobile</h6>
-                      </div>
-                      <div className="col-sm-9 text-secondary">
-                        <input
-                          type="text"
-                          className="form-control"
-                          value="(320) 380-4539"
-                          disabled={!isEdit}
-                        />
-                      </div>
-                    </div>
+
                     <div className="row mb-3">
                       <div className="col-sm-3">
                         <h6 className="mb-0">Address</h6>
                       </div>
                       <div className="col-sm-9 text-secondary">
-                        <input
-                          type="text"
-                          className="form-control"
-                          value="Bay Area, San Francisco, CA"
-                          disabled={!isEdit}
-                        />
+                        {isEdit ? (
+                          <input
+                            type="text"
+                            className="form-control w-50 h-75"
+                            placeholder="Bay Area, San Francisco, CA"
+                            defaultValue={profile.address}
+                            disabled={!isEdit}
+                            {...register("address")}
+                          />
+                        ) : (
+                          <span className="text-secondary">
+                            {profile.address}
+                          </span>
+                        )}
                       </div>
                     </div>
                     <div className="row">
