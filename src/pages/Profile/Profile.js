@@ -11,7 +11,7 @@ const Profile = () => {
   const [user, loading, error] = useAuthState(auth);
   const [profile, setProfile] = useState({});
   useEffect(() => {
-    fetch(`http://localhost:5000/user/${user.email}`)
+    fetch(`https://thawing-lowlands-51987.herokuapp.com/user/${user.email}`)
       .then((res) => res.json())
       .then((res) => setProfile(res));
   }, [user]);
@@ -24,7 +24,7 @@ const Profile = () => {
   const onSubmit = (data) => {
     data.email = user.email;
     if (isEdit) {
-      fetch("http://localhost:5000/user", {
+      fetch("https://thawing-lowlands-51987.herokuapp.com/user", {
         method: "PUT",
         headers: {
           "content-type": "application/json",

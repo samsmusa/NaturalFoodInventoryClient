@@ -81,7 +81,7 @@ const Inventory = () => {
     const [id, setid] = useState("we");
     const [formData, setformData] = useState({});
     const [alldata, setalldata] = useState([]);
-    const url = `http://localhost:5000/products/${user.email}`
+    const url = `https://thawing-lowlands-51987.herokuapp.com/products/${user.email}`
     useEffect(()=>{
       fetch(url, {
         headers: {
@@ -106,7 +106,7 @@ const Inventory = () => {
     };
   
     const removeItem = async (id) => {
-      await fetch(`http://localhost:5000/products/${id}`,  {
+      await fetch(`https://thawing-lowlands-51987.herokuapp.com/products/${id}`,  {
         method: "POST",
         headers: {
           'content-type': 'application/json'
@@ -168,7 +168,7 @@ const Inventory = () => {
       data.email = user.email;
       if(isAdd){
       data.addDate = utc
-      await fetch("http://localhost:5000/products", {
+      await fetch("https://thawing-lowlands-51987.herokuapp.com/products", {
         method: "POST",
         headers: {
           'content-type': 'application/json'
@@ -188,7 +188,7 @@ const Inventory = () => {
     }else {
       data.editDate = utc
       let {_id, ...res}= data
-      await fetch(`http://localhost:5000/products/${formData._id}`, {
+      await fetch(`https://thawing-lowlands-51987.herokuapp.com/products/${formData._id}`, {
         method: "PUT",
         headers: {
           'content-type': 'application/json'

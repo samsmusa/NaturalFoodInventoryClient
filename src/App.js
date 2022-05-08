@@ -22,6 +22,7 @@ import Categories from "./pages/MyItem/Inventory/Categories/Categories";
 import Attributes from "./pages/MyItem/Inventory/Attributes/Attributes";
 import LocationAndZone from "./pages/MyItem/Inventory/LocationAndZone/LocationAndZone";
 import Item from "./pages/Item/Item";
+import Blog from "./pages/Blog/Blog";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/" element={<Homepage></Homepage>}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
+        <Route path="/blog" element={<Blog />}></Route>
 
         <Route
           path="/myitem"
@@ -72,6 +74,12 @@ function App() {
           }
         ></Route>
       </Routes>
+      <footer class="bg-light text-center text-lg-start">
+  <div class="text-center p-3" style={{backgroundColor: "rgba(0, 0, 0, 0.2)"}}>
+    © 2020 Copyright:
+    <a class="text-dark" href="https://mdbootstrap.com/">sams musa</a>
+  </div>
+</footer>
     </div>
   );
 }

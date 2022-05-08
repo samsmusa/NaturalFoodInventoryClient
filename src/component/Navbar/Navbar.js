@@ -29,8 +29,13 @@ const Navbar = () => {
           </button>
         <div className="collapse navbar-collapse d-flex flex-row-reverse ailgn-items-center" id="navbarNav">
           <ul className="navbar-nav align-items-center">
+            <li className={location.pathname.startsWith("/blog") ? "nav-item active-link" : "nav-item"}>
+              <Link  className="nav-link active" aria-current="page" to='/blog'>
+                Blog
+              </Link>
+            </li>
             <li className={location.pathname.startsWith("/myitem") ? "nav-item active-link" : "nav-item"}>
-              <Link  className="nav-link active" aria-current="page" to='/myitem'>
+              <Link  className="nav-link active" aria-current="page" to='/myitem/inventory/inventory'>
                 Manage
               </Link>
             </li>

@@ -68,7 +68,7 @@ const Categories = ({ setalldata, alldata, url }) => {
     fetch(url)
     .then(res=>res.json())
     .then(res=>setdata(res))
-  },[])
+  },[]);
 
 
   const [catValue, setcatValue] = useState([]);
@@ -78,10 +78,11 @@ const Categories = ({ setalldata, alldata, url }) => {
     } else {
       setcatValue(catValue.filter((item) => item !== event.target.value));
     }
-  }
+  };
 
   const handleChange1 = (event, newValue) => {
     setValue(newValue);
+  };
 
   
 
@@ -97,10 +98,6 @@ const Categories = ({ setalldata, alldata, url }) => {
   function valuetext(value) {
     return `${value}`;
   }
-
-
-
-  
 
 
 

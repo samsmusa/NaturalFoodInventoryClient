@@ -34,7 +34,7 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await signInWithEmailAndPassword(email, password);
-    await fetch("http://localhost:5000/gettoken", {
+    await fetch("https://thawing-lowlands-51987.herokuapp.com/gettoken", {
       method: "POST",
       headers: {
         "content-type": "application/json",

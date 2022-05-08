@@ -20,7 +20,7 @@ const Homepage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   let from = location.state?.location;
-  const url = "http://localhost:5000/products/"
+  const url = "https://thawing-lowlands-51987.herokuapp.com/products/"
 
   return (
     <AnimatePresence>

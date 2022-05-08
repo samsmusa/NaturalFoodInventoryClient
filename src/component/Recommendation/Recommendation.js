@@ -12,7 +12,7 @@ const Recommendation =(props)=>{
         <div className="Interest-banner">
             <img src={InterestBanner} alt="interestbanner"/>
             <p>The best gifts come from the heart<br/>according not the store    </p>
-            <NavLink to="/home/Interest/Preference">
+            <NavLink to="/">
                 <button>Choose Interest</button>
             </NavLink>
         </div>

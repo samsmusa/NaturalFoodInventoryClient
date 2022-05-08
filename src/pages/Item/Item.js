@@ -5,7 +5,7 @@ import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 const Item = () => {
   const { id } = useParams();
   const [product, setProudct] = useState({});
-  const url = `http://localhost:5000/product/${id}`;
+  const url = `https://thawing-lowlands-51987.herokuapp.com/product/${id}`;
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
@@ -24,7 +24,7 @@ const Item = () => {
   const onSubmit = async (data) => {
     const {_id, ...dataValue} = product
     dataValue.quantity = String(parseInt(dataValue.quantity) + parseInt(data.value))
-    await fetch(`http://localhost:5000/products/${product._id}`, {
+    await fetch(`https://thawing-lowlands-51987.herokuapp.com/products/${product._id}`, {
       method: "PUT",
       headers: {
         'content-type': 'application/json'

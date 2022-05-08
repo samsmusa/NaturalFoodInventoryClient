@@ -274,46 +274,10 @@ const MyItem = () => {
         </div>
       </div>
 
-      <i className="fa-solid fa-trash-xmark"></i>
-      <i className="fa-solid fa-trash-xmark"></i>
-      <i className="fa-solid fa-trash-xmark"></i>
-      <div className="fa-3x">
-        <i className="fas fa-spinner fa-spin"></i>
-        <i className="fas fa-circle-notch fa-spin"></i>
-        <i className="fas fa-sync fa-spin"></i>
-        <i className="fas fa-cog fa-spin"></i>
-        <i className="fas fa-spinner fa-pulse"></i>
-        <i className="fas fa-stroopwafel fa-spin"></i>
-      </div>
-     
-
-
-      {/* <!-- Modal --> */}
+      
       
     </div>
-    // <div>
-    //   <div className="container">
-    //       <div className="mt-3 Course-Content">
-    //         <Categories alldata={alldata} setalldata={setalldata} />
-    //         <div className="row mt-5">
-    //           <div className="col-12">
-    //             <p className="CartTitle">My Courses</p>
-    //           </div>
-    //         </div>
-
-    //         <div className="row">
-    //           <div className="col-12">
-    //             <p className="CartSubTitle">You have 4 Courses!</p>
-    //           </div>
-    //         </div>
-    //       </div>
-
-    //       <div className="flex-row">
-    //         <MyItemCard />
-    //       </div>
-
-    //   </div>
-    // </div>
+    
   );
 };
 
